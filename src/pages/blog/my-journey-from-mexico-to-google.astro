@@ -1,0 +1,441 @@
+---
+const currentYear = new Date().getFullYear();
+const post = {
+  title: "My Journey from Mexico to Google",
+  date: "2024-12-05",
+  readTime: "6 min read",
+  category: "Personal",
+  excerpt:
+    "The challenges, learnings, and experiences that shaped my path in tech.",
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={post.excerpt} />
+
+    <!-- Ultra-modern typography from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{post.title} • Veronika Flores</title>
+
+    <style>
+      :root {
+        --color-primary: #000000;
+        --color-secondary: #404040;
+        --color-tertiary: #808080;
+        --color-accent: #f5f5f5;
+        --color-background: #ffffff;
+        --color-surface: #fafafa;
+        --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-mono: "JetBrains Mono", "Courier New", monospace;
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 2rem;
+        --spacing-lg: 4rem;
+        --spacing-xl: 6rem;
+        --border-radius: 2px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        font-family: var(--font-primary);
+        font-size: 16px;
+        line-height: 1.6;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--color-background);
+        color: var(--color-primary);
+        font-weight: 400;
+      }
+
+      /* Navigation */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-logo {
+        font-family: var(--font-mono);
+        font-weight: 500;
+        font-size: 1.125rem;
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: var(--spacing-md);
+        list-style: none;
+      }
+
+      .nav-link {
+        color: var(--color-secondary);
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+        transition: var(--transition);
+        text-transform: uppercase;
+      }
+
+      .nav-link:hover {
+        color: var(--color-primary);
+      }
+
+      /* Article Layout */
+      .article {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: calc(80px + var(--spacing-xl)) var(--spacing-md)
+          var(--spacing-xl);
+      }
+
+      .article-header {
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .article-category {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: var(--color-surface);
+        border-radius: var(--border-radius);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--color-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .article-title {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        margin-bottom: var(--spacing-sm);
+        line-height: 1.1;
+      }
+
+      .article-meta {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-md);
+        font-size: 0.875rem;
+        color: var(--color-tertiary);
+        font-family: var(--font-mono);
+      }
+
+      .article-image {
+        width: 100%;
+        max-width: 600px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: var(--border-radius);
+        margin: var(--spacing-lg) auto;
+        display: block;
+        filter: grayscale(100%);
+        transition: var(--transition);
+      }
+
+      .article-image:hover {
+        filter: grayscale(0%);
+      }
+
+      .article-content {
+        line-height: 1.8;
+        font-size: 1.125rem;
+      }
+
+      .article-content h2 {
+        font-size: 1.75rem;
+        font-weight: 500;
+        margin: var(--spacing-lg) 0 var(--spacing-md);
+        color: var(--color-primary);
+      }
+
+      .article-content h3 {
+        font-size: 1.375rem;
+        font-weight: 500;
+        margin: var(--spacing-md) 0 var(--spacing-sm);
+        color: var(--color-primary);
+      }
+
+      .article-content p {
+        margin-bottom: var(--spacing-md);
+        color: var(--color-secondary);
+      }
+
+      .article-content blockquote {
+        border-left: 3px solid var(--color-primary);
+        padding-left: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+        font-style: italic;
+        color: var(--color-tertiary);
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        color: var(--color-secondary);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-lg);
+        transition: var(--transition);
+      }
+
+      .back-link:hover {
+        color: var(--color-primary);
+      }
+
+      /* Footer */
+      .footer {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: var(--spacing-md);
+        text-align: center;
+        color: var(--color-tertiary);
+        font-size: 0.875rem;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .article-meta {
+          flex-direction: column;
+          gap: var(--spacing-xs);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo">veronika.dev</a>
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/blog" class="nav-link">Blog</a></li>
+          <li><a href="/#about" class="nav-link">About</a></li>
+          <li><a href="/#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Article -->
+    <article class="article">
+      <a href="/blog" class="back-link"> ← Back to Blog </a>
+
+      <header class="article-header">
+        <span class="article-category">{post.category}</span>
+        <h1 class="article-title">{post.title}</h1>
+        <div class="article-meta">
+          <span
+            >{
+              new Date(post.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }</span
+          >
+          <span>{post.readTime}</span>
+        </div>
+      </header>
+
+      <img
+        src="/png/me_selfieportrait_in_office_with_golang_shirt.png"
+        alt="Veronika in Google office"
+        class="article-image"
+      />
+
+      <div class="article-content">
+        <p>
+          A los 20 años, viviendo en México, nunca imaginé que tres años después
+          estaría trabajando en las oficinas de Google en California. Esta es la
+          historia de cómo una joven apasionada por el anime, los videojuegos y
+          la tecnología logró cumplir uno de sus sueños más grandes.
+        </p>
+
+        <h2>Los Primeros Pasos en México</h2>
+
+        <p>
+          Todo comenzó con mi fascinación por la experiencia del usuario.
+          Mientras mis amigos jugaban videojuegos, yo analizaba por qué ciertos
+          interfaces me hacían sentir más conectada con el juego. ¿Por qué
+          algunos sitios web me hacían querer explorar más, mientras otros me
+          frustraban?
+        </p>
+
+        <p>
+          En México, empecé autodidacta aprendiendo Figma, CSS, y los
+          fundamentos del diseño UX/UI. Mi estética kawaii no era vista como
+          algo profesional en ese momento, pero yo sabía que la personalidad en
+          el diseño podía ser un diferenciador, no una limitación.
+        </p>
+
+        <h3>El Salto a la Programación</h3>
+
+        <p>
+          Decidí que no solo quería diseñar interfaces; quería construirlas.
+          Aprendí Angular porque me gustó su estructura y filosofía. Después, Go
+          se convirtió en mi lenguaje favorito por su simplicidad y performance.
+          La combinación de diseño y desarrollo me dio una perspectiva única.
+        </p>
+
+        <blockquote>
+          "No basta con que las interfaces se vean bien; deben funcionar
+          perfectamente y ser técnicamente sólidas."
+        </blockquote>
+
+        <h2>La Transición a DevOps</h2>
+
+        <p>
+          Trabajando en proyectos freelance, me di cuenta de que la experiencia
+          del usuario no termina en el frontend. La velocidad de carga, la
+          disponibilidad, la escalabilidad - todo eso impacta directamente cómo
+          los usuarios perciben un producto.
+        </p>
+
+        <p>
+          Aprendí Kubernetes, Docker, y cloud infrastructure no porque fuera
+          requerido, sino porque entendí que un UX Engineer completo debe
+          comprender todo el stack. Esta visión holística fue lo que
+          eventualmente llamó la atención de Google.
+        </p>
+
+        <h2>El Proceso de Aplicación a Google</h2>
+
+        <p>
+          El proceso fue intenso. Seis rondas de entrevistas cubriendo design
+          thinking, coding challenges en Go y TypeScript, system design, y
+          cultural fit. Lo que más me ayudó fue demostrar cómo mi background
+          multicultural y mi perspectiva única podrían aportar valor al equipo.
+        </p>
+
+        <p>
+          Durante las entrevistas, no escondí mi personalidad kawaii. Al
+          contrario, expliqué cómo esa sensibilidad estética me ayuda a crear
+          productos más humanizados y accesibles. Google valoró esa
+          autenticidad.
+        </p>
+
+        <h2>La Vida en California</h2>
+
+        <p>
+          Mudarme de México a California fue overwhelming al principio. Nuevo
+          país, nuevo idioma profesional, nuevas dinámicas de trabajo. Pero la
+          diversidad en Google me hizo sentir en casa rápidamente.
+        </p>
+
+        <p>
+          Trabajar en productos que impactan a millones de usuarios diariamente
+          me ha enseñado la importancia de cada decisión de diseño. Un cambio de
+          2px en el spacing puede mejorar la conversión en 0.1%, lo que
+          representa miles de usuarios beneficiados.
+        </p>
+
+        <h3>Mantener Mis Raíces</h3>
+
+        <p>
+          Algo que aprendí es que la success no requiere cambiar quien eres.
+          Sigo viendo anime los fines de semana, sigo amando los videojuegos, y
+          sigo creando interfaces con esa sensibilidad estética que me
+          caracteriza.
+        </p>
+
+        <p>
+          Mi herencia mexicana me da una perspectiva diferente sobre
+          accessibility y inclusión. Entiendo qué significa diseñar para
+          usuarios con diferentes contexts tecnológicos y culturales.
+        </p>
+
+        <h2>Consejos para Futuros Dreamers</h2>
+
+        <p>
+          <strong>1. Tu personalidad es tu fortaleza:</strong> No escondas lo que
+          te hace único. En tech, la diversidad de pensamiento es invaluable.
+        </p>
+
+        <p>
+          <strong>2. Aprende más allá de tu especialidad:</strong> Ser T-shaped professional
+          te abre más puertas que ser solo un expert en una cosa.
+        </p>
+
+        <p>
+          <strong>3. Construye proyectos que importan:</strong> GitHub stars son
+          cool, pero proyectos que resuelven problemas reales demuestran impact.
+        </p>
+
+        <p>
+          <strong>4. Network authentically:</strong> Las mejores oportunidades vienen
+          de connections genuinas, no de networking forzado.
+        </p>
+
+        <h2>Looking Forward</h2>
+
+        <p>
+          Hoy, a los 23 años, estoy exactamente donde quería estar, pero el
+          journey no para. Quiero seguir bridging la brecha entre design y
+          development, crear productos más inclusivos, y eventually, mentorear a
+          otras jóvenes latinas que sueñan con trabajar en tech.
+        </p>
+
+        <p>
+          Cada día en Google es un recordatorio de que los sueños grandes
+          requieren trabajo duro, pero cuando combinas pasión genuina con skills
+          técnicos sólidos, las posibilidades son infinitas.
+        </p>
+
+        <p>
+          Si estás leyendo esto desde México, América Latina, o cualquier lugar
+          del mundo, pensando que tus sueños son demasiado grandes: no lo son.
+          Tu perspectiva única es exactamente lo que el mundo tech necesita.
+        </p>
+      </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        &copy; {currentYear} Veronika Flores. Crafted with passion using Astro.
+      </p>
+    </footer>
+  </body>
+</html>

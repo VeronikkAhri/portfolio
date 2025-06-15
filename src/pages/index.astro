@@ -1,16 +1,813 @@
 ---
-
+const currentYear = new Date().getFullYear();
 ---
 
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Veronika Flores - UX/UI Engineer & DevOps Specialist at Google California. 3+ years experience in Go, Angular, Figma, and user-centered design."
+    />
+    <meta
+      name="keywords"
+      content="UX/UI Engineer, DevOps, Google, Angular, Go, Figma, Tailwind CSS, Frontend Developer"
+    />
+    <meta
+      property="og:title"
+      content="Veronika Flores - UX/UI Engineer & DevOps"
+    />
+    <meta
+      property="og:description"
+      content="Professional portfolio of Veronika Flores, UX/UI Engineer & DevOps Specialist at Google California"
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Ultra-modern typography from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Veronika Flores • UX/UI Engineer & DevOps</title>
+
+    <style>
+      :root {
+        --color-primary: #000000;
+        --color-secondary: #404040;
+        --color-tertiary: #808080;
+        --color-accent: #f5f5f5;
+        --color-background: #ffffff;
+        --color-surface: #fafafa;
+        --color-hero-text: #ffffff;
+        --color-hero-secondary: rgba(255, 255, 255, 0.9);
+        --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-mono: "JetBrains Mono", "Courier New", monospace;
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 2rem;
+        --spacing-lg: 4rem;
+        --spacing-xl: 6rem;
+        --border-radius: 2px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        font-family: var(--font-primary);
+        font-size: 16px;
+        line-height: 1.6;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--color-background);
+        color: var(--color-primary);
+        font-weight: 400;
+        overflow-x: hidden;
+      }
+
+      /* Hero Section with Video Background */
+      .hero {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .hero-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -2;
+        opacity: 1;
+        filter: brightness(0.9) contrast(1.2) saturate(0.8);
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.85) 0%,
+          rgba(255, 255, 255, 0.75) 50%,
+          rgba(255, 255, 255, 0.85) 100%
+        );
+        z-index: -1;
+      }
+
+      .hero-content {
+        text-align: center;
+        z-index: 1;
+        max-width: 900px;
+        animation: fadeInUp 1s ease-out;
+        padding: var(--spacing-md);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-title {
+        font-family: var(--font-primary);
+        font-size: clamp(3.5rem, 8vw, 6rem);
+        font-weight: 200;
+        letter-spacing: -0.02em;
+        margin-bottom: var(--spacing-sm);
+        line-height: 0.9;
+        color: var(--color-primary);
+        text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+      }
+
+      .hero-subtitle {
+        font-family: var(--font-primary);
+        font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+        font-weight: 400;
+        color: var(--color-secondary);
+        margin-bottom: var(--spacing-md);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+      }
+
+      .hero-description {
+        font-family: var(--font-primary);
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        color: var(--color-secondary);
+        max-width: 600px;
+        margin: 0 auto var(--spacing-lg);
+        line-height: 1.6;
+        font-weight: 300;
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+      }
+
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: var(--color-primary);
+        color: var(--color-background);
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: var(--transition);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--color-primary);
+      }
+
+      .hero-cta:hover {
+        background: var(--color-background);
+        color: var(--color-primary);
+        transform: translateY(-1px);
+      }
+
+      /* Navigation */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+        transition: var(--transition);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-logo {
+        font-family: var(--font-mono);
+        font-weight: 500;
+        font-size: 1.125rem;
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: var(--spacing-md);
+        list-style: none;
+      }
+
+      .nav-link {
+        color: var(--color-secondary);
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+        transition: var(--transition);
+        text-transform: uppercase;
+      }
+
+      .nav-link:hover {
+        color: var(--color-primary);
+      }
+
+      /* Sections */
+      .section {
+        padding: var(--spacing-xl) var(--spacing-md);
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        margin-bottom: var(--spacing-lg);
+        text-align: center;
+      }
+
+      /* About Section */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: var(--spacing-lg);
+        align-items: center;
+      }
+
+      .about-image {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: var(--border-radius);
+        filter: grayscale(100%);
+        transition: var(--transition);
+      }
+
+      .about-image:hover {
+        filter: grayscale(0%);
+      }
+
+      .about-content h3 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: var(--spacing-sm);
+        color: var(--color-primary);
+      }
+
+      .about-content p {
+        color: var(--color-secondary);
+        margin-bottom: var(--spacing-sm);
+        line-height: 1.7;
+      }
+
+      .about-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-md);
+      }
+
+      .stat {
+        text-align: center;
+        padding: var(--spacing-sm);
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        display: block;
+      }
+
+      .stat-label {
+        font-size: 0.875rem;
+        color: var(--color-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Skills Section */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+      }
+
+      .skill-category {
+        padding: var(--spacing-md);
+        background: var(--color-surface);
+        border-radius: var(--border-radius);
+        transition: var(--transition);
+      }
+
+      .skill-category:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .skill-category h3 {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin-bottom: var(--spacing-sm);
+        color: var(--color-primary);
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-xs);
+      }
+
+      .skill-tag {
+        padding: 0.25rem 0.75rem;
+        background: var(--color-background);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: var(--border-radius);
+        font-size: 0.875rem;
+        color: var(--color-secondary);
+        font-family: var(--font-mono);
+      }
+
+      /* Contact Section */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-lg);
+      }
+
+      /* Behind the Scenes Section */
+      .behind-scenes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: var(--spacing-lg);
+      }
+
+      .media-item {
+        background: var(--color-surface);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        transition: var(--transition);
+      }
+
+      .media-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .media-video,
+      .media-photo {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .media-video:hover,
+      .media-photo:hover {
+        filter: brightness(1.1);
+      }
+
+      .media-content {
+        padding: var(--spacing-md);
+      }
+
+      .media-content h3 {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin-bottom: var(--spacing-sm);
+        color: var(--color-primary);
+      }
+
+      .media-content p {
+        color: var(--color-secondary);
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .contact-info h3 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .contact-links {
+        list-style: none;
+        margin-top: var(--spacing-md);
+      }
+
+      .contact-links li {
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .contact-links a {
+        color: var(--color-secondary);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+      }
+
+      .contact-links a:hover {
+        color: var(--color-primary);
+      }
+
+      .availability {
+        background: var(--color-surface);
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        text-align: center;
+      }
+
+      .availability-status {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        font-weight: 500;
+        color: #22c55e;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .availability-dot {
+        width: 8px;
+        height: 8px;
+        background: #22c55e;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      /* Footer */
+      .footer {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: var(--spacing-md);
+        text-align: center;
+        color: var(--color-tertiary);
+        font-size: 0.875rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .about-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .about-stats {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .section {
+          padding: var(--spacing-lg) var(--spacing-sm);
+        }
+      }
+
+      /* Smooth scroll offset for fixed nav */
+      html {
+        scroll-padding-top: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo">veronika.dev</a>
+        <ul class="nav-links">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#behind-scenes" class="nav-link">Behind Scenes</a></li>
+          <li><a href="/blog" class="nav-link">Blog</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto">
+        <source src="/mp4/myself_promo_impactful_vide.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">Veronika Flores</h1>
+        <p class="hero-subtitle">UX/UI Engineer & DevOps Specialist</p>
+        <p class="hero-description">
+          Crafting exceptional digital experiences at Google California.
+          Passionate about user-centered design, modern development practices,
+          and creating impactful solutions that bridge design and technology.
+        </p>
+        <a href="#contact" class="hero-cta">
+          <span>Let's Collaborate</span>
+          <span>→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <h2 class="section-title">About</h2>
+      <div class="about-grid">
+        <img
+          src="/png/me_posing_front_google_office_with_golang_shirt.png"
+          alt="Veronika at Google Office"
+          class="about-image"
+        />
+        <div class="about-content">
+          <h3>Building the Future of Digital Experiences</h3>
+          <p>
+            I'm a 23-year-old UX/UI Engineer and DevOps Specialist currently
+            working at Google in California. With 3+ years of experience, I
+            specialize in creating seamless user experiences while maintaining
+            robust development operations.
+          </p>
+          <p>
+            My expertise spans from user research and interface design to modern
+            development with Go, Angular, and cloud infrastructure. I'm
+            passionate about anime, gaming, and bringing a kawaii aesthetic to
+            professional work.
+          </p>
+          <p>
+            Based in California, originally from Mexico, I bring a unique
+            perspective to technology and design, always focusing on creating
+            solutions that truly matter to users.
+          </p>
+
+          <div class="about-stats">
+            <div class="stat">
+              <span class="stat-number">3+</span>
+              <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">∞</span>
+              <span class="stat-label">Coffee Consumed</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Passion Driven</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+      <h2 class="section-title">Expertise</h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>UX/UI Design</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">figma</span>
+            <span class="skill-tag">user-research</span>
+            <span class="skill-tag">prototyping</span>
+            <span class="skill-tag">design-systems</span>
+            <span class="skill-tag">accessibility</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Frontend Development</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">angular</span>
+            <span class="skill-tag">typescript</span>
+            <span class="skill-tag">css</span>
+            <span class="skill-tag">tailwind</span>
+            <span class="skill-tag">astro</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Backend & DevOps</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">golang</span>
+            <span class="skill-tag">kubernetes</span>
+            <span class="skill-tag">docker</span>
+            <span class="skill-tag">gcp</span>
+            <span class="skill-tag">ci/cd</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Certifications</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">ux-certified</span>
+            <span class="skill-tag">google-cloud</span>
+            <span class="skill-tag">design-thinking</span>
+            <span class="skill-tag">agile</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Behind the Scenes Section -->
+    <section id="behind-scenes" class="section">
+      <h2 class="section-title">Behind the Scenes</h2>
+      <div class="behind-scenes-grid">
+        <div class="media-item">
+          <video class="media-video" controls playsinline>
+            <source
+              src="/mp4/me_posing_in_office_with_angular_shirt.mp4"
+              type="video/mp4"
+            />
+          </video>
+          <div class="media-content">
+            <h3>Angular Development Life</h3>
+            <p>
+              A glimpse into my daily routine working with Angular at Google.
+              From architecture decisions to code reviews, this is how modern
+              enterprise development happens.
+            </p>
+          </div>
+        </div>
+
+        <div class="media-item">
+          <video class="media-video" controls playsinline>
+            <source
+              src="/mp4/me_selfieprotrait_in_office_with_golang_shirt.mp4"
+              type="video/mp4"
+            />
+          </video>
+          <div class="media-content">
+            <h3>Go Programming Sessions</h3>
+            <p>
+              Backend development with Go at scale. Building robust, performant
+              services that power user experiences for millions of people
+              worldwide.
+            </p>
+          </div>
+        </div>
+
+        <div class="media-item media-image">
+          <img
+            src="/png/me_selfieportrait_in_office_with_golang_shirt.png"
+            alt="Veronika coding with Go"
+            class="media-photo"
+          />
+          <div class="media-content">
+            <h3>Engineering Culture</h3>
+            <p>
+              The intersection of kawaii aesthetic and serious engineering.
+              Proving that personality and professionalism aren't mutually
+              exclusive in the tech industry.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <h2 class="section-title">Let's Connect</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Ready to create something amazing?</h3>
+          <p>
+            I'm always excited to work on innovative projects that push the
+            boundaries of user experience and technical excellence. Whether you
+            need UX/UI design, frontend development, or DevOps expertise, let's
+            build something extraordinary together.
+          </p>
+
+          <ul class="contact-links">
+            <li>
+              <a
+                href="https://github.com/VeronikkAhri"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>github.com/VeronikkAhri</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/veronika-flores-8b469136b/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>linkedin.com/in/veronika-flores</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.tiktok.com/@deveronikkahri"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>tiktok.com/@deveronikkahri</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="availability">
+          <div class="availability-status">
+            <div class="availability-dot"></div>
+            <span>Available for Freelance</span>
+          </div>
+          <p>Currently accepting new projects and collaborations</p>
+          <p
+            style="margin-top: 1rem; color: var(--color-tertiary); font-size: 0.875rem;"
+          >
+            Based in California • Mexico heritage
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        &copy; {currentYear} Veronika Flores. Crafted with passion using Astro.
+      </p>
+    </footer>
+
+    <script>
+      // Ensure video plays
+      document.addEventListener("DOMContentLoaded", function () {
+        const video = document.querySelector(".hero-video") as HTMLVideoElement;
+        if (video) {
+          video.play().catch((e: any) => {
+            console.log("Video autoplay failed:", e);
+          });
+        }
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const href = (e.currentTarget as HTMLAnchorElement).getAttribute(
+            "href"
+          );
+          if (href) {
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          }
+        });
+      });
+
+      // Navigation background on scroll
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector(".nav");
+        if (nav) {
+          if (window.scrollY > 100) {
+            (nav as HTMLElement).style.background = "rgba(255, 255, 255, 0.98)";
+          } else {
+            (nav as HTMLElement).style.background = "rgba(255, 255, 255, 0.95)";
+          }
+        }
+      });
+    </script>
+  </body>
 </html>

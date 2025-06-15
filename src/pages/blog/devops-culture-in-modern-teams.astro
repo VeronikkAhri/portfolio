@@ -1,0 +1,460 @@
+---
+const currentYear = new Date().getFullYear();
+const post = {
+  title: "DevOps Culture in Modern Teams",
+  date: "2024-11-28",
+  readTime: "7 min read",
+  category: "DevOps",
+  excerpt:
+    "How to foster collaboration between development and operations for better products.",
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={post.excerpt} />
+
+    <!-- Ultra-modern typography from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{post.title} • Veronika Flores</title>
+
+    <style>
+      :root {
+        --color-primary: #000000;
+        --color-secondary: #404040;
+        --color-tertiary: #808080;
+        --color-accent: #f5f5f5;
+        --color-background: #ffffff;
+        --color-surface: #fafafa;
+        --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-mono: "JetBrains Mono", "Courier New", monospace;
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 2rem;
+        --spacing-lg: 4rem;
+        --spacing-xl: 6rem;
+        --border-radius: 2px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        font-family: var(--font-primary);
+        font-size: 16px;
+        line-height: 1.6;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--color-background);
+        color: var(--color-primary);
+        font-weight: 400;
+      }
+
+      /* Navigation */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-logo {
+        font-family: var(--font-mono);
+        font-weight: 500;
+        font-size: 1.125rem;
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: var(--spacing-md);
+        list-style: none;
+      }
+
+      .nav-link {
+        color: var(--color-secondary);
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+        transition: var(--transition);
+        text-transform: uppercase;
+      }
+
+      .nav-link:hover {
+        color: var(--color-primary);
+      }
+
+      /* Article Layout */
+      .article {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: calc(80px + var(--spacing-xl)) var(--spacing-md)
+          var(--spacing-xl);
+      }
+
+      .article-header {
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .article-category {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: var(--color-surface);
+        border-radius: var(--border-radius);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--color-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .article-title {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        margin-bottom: var(--spacing-sm);
+        line-height: 1.1;
+      }
+
+      .article-meta {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-md);
+        font-size: 0.875rem;
+        color: var(--color-tertiary);
+        font-family: var(--font-mono);
+      }
+
+      .article-content {
+        line-height: 1.8;
+        font-size: 1.125rem;
+      }
+
+      .article-content h2 {
+        font-size: 1.75rem;
+        font-weight: 500;
+        margin: var(--spacing-lg) 0 var(--spacing-md);
+        color: var(--color-primary);
+      }
+
+      .article-content h3 {
+        font-size: 1.375rem;
+        font-weight: 500;
+        margin: var(--spacing-md) 0 var(--spacing-sm);
+        color: var(--color-primary);
+      }
+
+      .article-content p {
+        margin-bottom: var(--spacing-md);
+        color: var(--color-secondary);
+      }
+
+      .article-content blockquote {
+        border-left: 3px solid var(--color-primary);
+        padding-left: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+        font-style: italic;
+        color: var(--color-tertiary);
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        color: var(--color-secondary);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-lg);
+        transition: var(--transition);
+      }
+
+      .back-link:hover {
+        color: var(--color-primary);
+      }
+
+      /* Footer */
+      .footer {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: var(--spacing-md);
+        text-align: center;
+        color: var(--color-tertiary);
+        font-size: 0.875rem;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .article-meta {
+          flex-direction: column;
+          gap: var(--spacing-xs);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo">veronika.dev</a>
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/blog" class="nav-link">Blog</a></li>
+          <li><a href="/#about" class="nav-link">About</a></li>
+          <li><a href="/#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Article -->
+    <article class="article">
+      <a href="/blog" class="back-link"> ← Back to Blog </a>
+
+      <header class="article-header">
+        <span class="article-category">{post.category}</span>
+        <h1 class="article-title">{post.title}</h1>
+        <div class="article-meta">
+          <span
+            >{
+              new Date(post.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }</span
+          >
+          <span>{post.readTime}</span>
+        </div>
+      </header>
+
+      <div class="article-content">
+        <p>
+          En Google, he sido testigo de cómo una cultura DevOps sólida puede
+          transformar completamente la velocidad y calidad de desarrollo de
+          productos. No es solo sobre herramientas o automation; es
+          fundamentalmente sobre cambiar la mentalidad de cómo los equipos
+          colaboran para crear mejores experiencias de usuario.
+        </p>
+
+        <h2>Más Allá de las Herramientas</h2>
+
+        <p>
+          Muchas organizaciones cometen el error de pensar que DevOps es
+          simplemente adoptar Kubernetes, Docker, y CI/CD pipelines. Esas son
+          herramientas importantes, pero DevOps es principalmente una filosofía
+          cultural que rompe los silos entre development y operations.
+        </p>
+
+        <blockquote>
+          "DevOps no es un trabajo title; es una manera de trabajar que prioriza
+          la colaboración, la iteración rápida, y la responsabilidad compartida
+          sobre el producto final."
+        </blockquote>
+
+        <h3>Los Pilares de una Cultura DevOps Exitosa</h3>
+
+        <p>
+          <strong>1. Shared Responsibility:</strong> En equipos DevOps maduros, todos
+          son responsables de la calidad, performance, y reliability del producto.
+          Los developers no "throw code over the wall" a operations; están involucrados
+          en el deployment y monitoring de sus features.
+        </p>
+
+        <p>
+          <strong>2. Feedback Loops Rápidos:</strong> La capacidad de iterar rápidamente
+          basándose en data real es crucial. Esto significa monitoring robusto, alerting
+          inteligente, y la habilidad de rollback changes rápidamente si algo sale
+          mal.
+        </p>
+
+        <p>
+          <strong>3. Automation as a Default:</strong> Todo lo que se puede automatizar,
+          debe automatizarse. Desde testing hasta deployment, la automation libera
+          tiempo para que los engineers se enfoquen en crear value, no en tareas
+          repetitivas.
+        </p>
+
+        <h2>Implementación Práctica en Google</h2>
+
+        <p>
+          En mis proyectos, hemos implementado prácticas que ejemplifican esta
+          cultura:
+        </p>
+
+        <h3>Infrastructure as Code</h3>
+
+        <p>
+          Toda nuestra infrastructure está definida en código usando
+          herramientas como Terraform y Kubernetes manifests. Esto significa que
+          cualquier change en infrastructure pasa por el mismo process de code
+          review que el application code.
+        </p>
+
+        <h3>Observability First</h3>
+
+        <p>
+          Implementamos logging, metrics, y tracing desde el primer día de
+          desarrollo. Usamos herramientas como Prometheus, Grafana, y custom
+          dashboards para tener visibility completa sobre system behavior.
+        </p>
+
+        <p>
+          Los SLIs (Service Level Indicators) y SLOs (Service Level Objectives)
+          no son afterthoughts; se definen durante el design phase y guían todas
+          las decisiones de architecture.
+        </p>
+
+        <h2>El Rol del UX/UI Engineer en DevOps</h2>
+
+        <p>
+          Como UX/UI Engineer con experiencia DevOps, tengo una perspectiva
+          única sobre cómo la infrastructure impacta directamente la user
+          experience:
+        </p>
+
+        <p>
+          <strong>Performance Budget:</strong> Entiendo cómo deployment strategies,
+          CDN configuration, y resource optimization afectan Core Web Vitals y user
+          satisfaction.
+        </p>
+
+        <p>
+          <strong>Progressive Deployment:</strong> Feature flags y canary deployments
+          me permiten release features gradually, monitoreando user behavior y making
+          adjustments basadas en real usage data.
+        </p>
+
+        <p>
+          <strong>Error Handling:</strong> Cuando algo falla en production, puedo
+          correlacionar error rates con specific UI interactions, facilitando debugging
+          y resolution más rápida.
+        </p>
+
+        <h2>Challenges Comunes y Soluciones</h2>
+
+        <h3>Resistance to Change</h3>
+
+        <p>
+          El biggest challenge en implementing DevOps culture es la resistance
+          al cambio. Teams que han trabajado en silos por años necesitan ver
+          benefits tangibles antes de adoptar nuevas practices.
+        </p>
+
+        <p>
+          <strong>Solución:</strong> Start small con wins rápidos. Implementa automated
+          testing para un proyecto pequeño y demuestra cómo reduce bugs en production.
+          El success breeds adoption.
+        </p>
+
+        <h3>Tool Proliferation</h3>
+
+        <p>
+          Es fácil caer en la trampa de adoptar demasiadas herramientas sin
+          estrategia clara. Cada tool añade complexity y learning curve.
+        </p>
+
+        <p>
+          <strong>Solución:</strong> Focus en principles primero, tools segundo.
+          Define claramente qué problems estás trying to solve antes de evaluar solutions.
+        </p>
+
+        <h2>Metrics que Importan</h2>
+
+        <p>En Google, medimos DevOps success usando DORA metrics:</p>
+
+        <p>
+          <strong>Deployment Frequency:</strong> ¿Qué tan seguido deployamos a production?
+          Teams high-performing deployean multiple times per day.
+        </p>
+
+        <p>
+          <strong>Lead Time for Changes:</strong> Time desde commit hasta running
+          en production. Shorter lead times permiten faster iteration y better responsiveness
+          to user feedback.
+        </p>
+
+        <p>
+          <strong>Change Failure Rate:</strong> Percentage de deployments que resultan
+          en degraded service. Lower rates indican better testing y deployment practices.
+        </p>
+
+        <p>
+          <strong>Time to Recovery:</strong> Cuánto tiempo toma restore service after
+          failure. Faster recovery times reducen user impact y business disruption.
+        </p>
+
+        <h2>El Futuro de DevOps Culture</h2>
+
+        <p>
+          DevOps está evolucionando hacia Platform Engineering, donde teams
+          especializados crean platforms que permiten a product teams ser más
+          autonomous. Esto democratiza DevOps capabilities sin requiring que
+          every developer sea un infrastructure expert.
+        </p>
+
+        <p>
+          AI y machine learning están empezando a play un rol más grande en
+          DevOps, desde predictive alerting hasta automated remediation de
+          common issues.
+        </p>
+
+        <p>
+          La culture DevOps no es un destination; es un journey de continuous
+          improvement. Cada team, cada organization debe find su propio path
+          basado en sus specific needs y constraints. Lo importante es empezar
+          con small changes que build momentum hacia bigger transformations.
+        </p>
+
+        <p>
+          Como engineers, nuestro job no es solo escribir código; es crear
+          systems que delivered value reliably y efficiently a users. DevOps
+          culture nos da el framework para achieve eso de manera sustainable y
+          scalable.
+        </p>
+      </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        &copy; {currentYear} Veronika Flores. Crafted with passion using Astro.
+      </p>
+    </footer>
+  </body>
+</html>

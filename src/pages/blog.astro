@@ -1,0 +1,494 @@
+---
+const currentYear = new Date().getFullYear();
+
+// Blog posts data - in a real application, this would come from a CMS or markdown files
+const blogPosts = [
+  {
+    id: 1,
+    title: "The Art of Minimal UX Design",
+    excerpt:
+      "Exploring how less can be more when creating user interfaces that truly connect with people.",
+    date: "2024-12-15",
+    readTime: "5 min read",
+    category: "UX Design",
+  },
+  {
+    id: 2,
+    title: "Building Scalable Angular Applications",
+    excerpt:
+      "Best practices for creating Angular applications that grow with your team and user base.",
+    date: "2024-12-10",
+    readTime: "8 min read",
+    category: "Development",
+  },
+  {
+    id: 3,
+    title: "My Journey from Mexico to Google",
+    excerpt:
+      "The challenges, learnings, and experiences that shaped my path in tech.",
+    date: "2024-12-05",
+    readTime: "6 min read",
+    category: "Personal",
+  },
+  {
+    id: 4,
+    title: "DevOps Culture in Modern Teams",
+    excerpt:
+      "How to foster collaboration between development and operations for better products.",
+    date: "2024-11-28",
+    readTime: "7 min read",
+    category: "DevOps",
+  },
+  {
+    id: 5,
+    title: "Design Systems with Figma",
+    excerpt:
+      "Creating consistent and scalable design systems that bridge design and development.",
+    date: "2024-11-20",
+    readTime: "10 min read",
+    category: "Design Systems",
+  },
+  {
+    id: 6,
+    title: "The Kawaii Aesthetic in Professional Work",
+    excerpt:
+      "How bringing personality and fun into professional design can improve user engagement.",
+    date: "2024-11-15",
+    readTime: "4 min read",
+    category: "Design Philosophy",
+  },
+];
+
+const categories = [...new Set(blogPosts.map((post) => post.category))];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Thoughts and insights from Veronika Flores on UX/UI design, development, and the intersection of technology and creativity."
+    />
+    <meta
+      name="keywords"
+      content="UX Design Blog, UI Development, Angular, Go, DevOps, Design Systems, Tech Blog"
+    />
+
+    <!-- Ultra-modern typography from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Blog • Veronika Flores</title>
+
+    <style>
+      :root {
+        --color-primary: #000000;
+        --color-secondary: #404040;
+        --color-tertiary: #808080;
+        --color-accent: #f5f5f5;
+        --color-background: #ffffff;
+        --color-surface: #fafafa;
+        --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-mono: "JetBrains Mono", "Courier New", monospace;
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 2rem;
+        --spacing-lg: 4rem;
+        --spacing-xl: 6rem;
+        --border-radius: 2px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        font-family: var(--font-primary);
+        font-size: 16px;
+        line-height: 1.6;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--color-background);
+        color: var(--color-primary);
+        font-weight: 400;
+      }
+
+      /* Navigation */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-logo {
+        font-family: var(--font-mono);
+        font-weight: 500;
+        font-size: 1.125rem;
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: var(--spacing-md);
+        list-style: none;
+      }
+
+      .nav-link {
+        color: var(--color-secondary);
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+        transition: var(--transition);
+        text-transform: uppercase;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--color-primary);
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: calc(80px + var(--spacing-xl)) var(--spacing-md)
+          var(--spacing-xl);
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .hero-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .hero-subtitle {
+        font-size: 1.25rem;
+        color: var(--color-secondary);
+        line-height: 1.6;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Filter Section */
+      .filters {
+        padding: 0 var(--spacing-md) var(--spacing-lg);
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .filter-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: var(--spacing-xs);
+      }
+
+      .filter-btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        background: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: var(--border-radius);
+        color: var(--color-secondary);
+        font-family: var(--font-mono);
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--color-primary);
+        color: white;
+        border-color: var(--color-primary);
+      }
+
+      /* Blog Grid */
+      .blog-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-md) var(--spacing-xl);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: var(--spacing-lg);
+      }
+
+      .blog-post {
+        background: var(--color-surface);
+        border-radius: var(--border-radius);
+        padding: var(--spacing-md);
+        transition: var(--transition);
+        cursor: pointer;
+      }
+
+      .blog-post:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .post-category {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: var(--color-background);
+        border-radius: var(--border-radius);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--color-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .post-title {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: var(--spacing-xs);
+        line-height: 1.3;
+        color: var(--color-primary);
+      }
+
+      .post-excerpt {
+        color: var(--color-secondary);
+        line-height: 1.6;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .post-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.875rem;
+        color: var(--color-tertiary);
+        font-family: var(--font-mono);
+      }
+
+      .post-date {
+        font-weight: 400;
+      }
+
+      .post-read-time {
+        font-style: italic;
+      }
+
+      /* Coming Soon Message */
+      .coming-soon {
+        text-align: center;
+        padding: var(--spacing-xl) var(--spacing-md);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .coming-soon h3 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: var(--spacing-sm);
+        color: var(--color-primary);
+      }
+
+      .coming-soon p {
+        color: var(--color-secondary);
+        line-height: 1.6;
+      }
+
+      /* Footer */
+      .footer {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: var(--spacing-md);
+        text-align: center;
+        color: var(--color-tertiary);
+        font-size: 0.875rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .blog-grid {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-md);
+        }
+
+        .filter-buttons {
+          justify-content: flex-start;
+          overflow-x: auto;
+          padding-bottom: var(--spacing-xs);
+        }
+      }
+
+      /* Smooth scroll offset for fixed nav */
+      html {
+        scroll-padding-top: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo">veronika.dev</a>
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/blog" class="nav-link active">Blog</a></li>
+          <li><a href="/#about" class="nav-link">About</a></li>
+          <li><a href="/#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1 class="hero-title">Thoughts & Insights</h1>
+      <p class="hero-subtitle">
+        Exploring the intersection of design, technology, and human experience.
+        Sharing learnings from my journey in UX/UI engineering and DevOps.
+      </p>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filters">
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-category="all">All Posts</button>
+        {
+          categories.map((category) => (
+            <button
+              class="filter-btn"
+              data-category={category.toLowerCase().replace(/\s+/g, "-")}
+            >
+              {category}
+            </button>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="blog-grid">
+      {
+        blogPosts.map((post) => (
+          <article
+            class="blog-post"
+            data-category={post.category.toLowerCase().replace(/\s+/g, "-")}
+          >
+            <span class="post-category">{post.category}</span>
+            <h2 class="post-title">{post.title}</h2>
+            <p class="post-excerpt">{post.excerpt}</p>
+            <div class="post-meta">
+              <span class="post-date">
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </span>
+              <span class="post-read-time">{post.readTime}</span>
+            </div>
+          </article>
+        ))
+      }
+    </section>
+
+    <!-- Coming Soon Message -->
+    <section class="coming-soon">
+      <h3>More Content Coming Soon</h3>
+      <p>
+        I'm currently working on detailed articles about UX design patterns,
+        Angular best practices, and my experiences in the tech industry. Stay
+        tuned for in-depth insights and practical tutorials.
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        &copy; {currentYear} Veronika Flores. Crafted with passion using Astro.
+      </p>
+    </footer>
+    <script>
+      // Filter functionality
+      const filterButtons = document.querySelectorAll(
+        ".filter-btn"
+      ) as NodeListOf<HTMLElement>;
+      const blogPosts = document.querySelectorAll(
+        ".blog-post"
+      ) as NodeListOf<HTMLElement>;
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          // Remove active class from all buttons
+          filterButtons.forEach((btn) => btn.classList.remove("active"));
+          // Add active class to clicked button
+          button.classList.add("active");
+
+          const category = button.dataset.category;
+
+          blogPosts.forEach((post) => {
+            if (category === "all" || post.dataset.category === category) {
+              post.style.display = "block";
+              post.style.animation = "fadeIn 0.3s ease-in";
+            } else {
+              post.style.display = "none";
+            }
+          });
+        });
+      }); // Add click handlers for blog posts
+      blogPosts.forEach((post, index) => {
+        post.addEventListener("click", () => {
+          const postSlugs = [
+            "the-art-of-minimal-ux-design",
+            "building-scalable-angular-applications",
+            "my-journey-from-mexico-to-google",
+            "devops-culture-in-modern-teams",
+            "design-systems-with-figma",
+            "the-kawaii-aesthetic-in-professional-work",
+          ];
+
+          if (postSlugs[index]) {
+            window.location.href = `/blog/${postSlugs[index]}`;
+          }
+        });
+      });
+
+      // Add fade-in animation
+      const style = document.createElement("style");
+      style.textContent = `
+				@keyframes fadeIn {
+					from { opacity: 0; transform: translateY(10px); }
+					to { opacity: 1; transform: translateY(0); }
+				}
+			`;
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>

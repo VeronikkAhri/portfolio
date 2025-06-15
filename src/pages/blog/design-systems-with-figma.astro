@@ -1,0 +1,522 @@
+---
+const currentYear = new Date().getFullYear();
+const post = {
+  title: "Design Systems with Figma",
+  date: "2024-11-20",
+  readTime: "10 min read",
+  category: "Design Systems",
+  excerpt:
+    "Creating consistent and scalable design systems that bridge design and development.",
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={post.excerpt} />
+
+    <!-- Ultra-modern typography from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{post.title} • Veronika Flores</title>
+
+    <style>
+      :root {
+        --color-primary: #000000;
+        --color-secondary: #404040;
+        --color-tertiary: #808080;
+        --color-accent: #f5f5f5;
+        --color-background: #ffffff;
+        --color-surface: #fafafa;
+        --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-mono: "JetBrains Mono", "Courier New", monospace;
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 2rem;
+        --spacing-lg: 4rem;
+        --spacing-xl: 6rem;
+        --border-radius: 2px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        font-family: var(--font-primary);
+        font-size: 16px;
+        line-height: 1.6;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--color-background);
+        color: var(--color-primary);
+        font-weight: 400;
+      }
+
+      /* Navigation */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-logo {
+        font-family: var(--font-mono);
+        font-weight: 500;
+        font-size: 1.125rem;
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: var(--spacing-md);
+        list-style: none;
+      }
+
+      .nav-link {
+        color: var(--color-secondary);
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+        transition: var(--transition);
+        text-transform: uppercase;
+      }
+
+      .nav-link:hover {
+        color: var(--color-primary);
+      }
+
+      /* Article Layout */
+      .article {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: calc(80px + var(--spacing-xl)) var(--spacing-md)
+          var(--spacing-xl);
+      }
+
+      .article-header {
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .article-category {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: var(--color-surface);
+        border-radius: var(--border-radius);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--color-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .article-title {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        margin-bottom: var(--spacing-sm);
+        line-height: 1.1;
+      }
+
+      .article-meta {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-md);
+        font-size: 0.875rem;
+        color: var(--color-tertiary);
+        font-family: var(--font-mono);
+      }
+
+      .article-content {
+        line-height: 1.8;
+        font-size: 1.125rem;
+      }
+
+      .article-content h2 {
+        font-size: 1.75rem;
+        font-weight: 500;
+        margin: var(--spacing-lg) 0 var(--spacing-md);
+        color: var(--color-primary);
+      }
+
+      .article-content h3 {
+        font-size: 1.375rem;
+        font-weight: 500;
+        margin: var(--spacing-md) 0 var(--spacing-sm);
+        color: var(--color-primary);
+      }
+
+      .article-content p {
+        margin-bottom: var(--spacing-md);
+        color: var(--color-secondary);
+      }
+
+      .article-content blockquote {
+        border-left: 3px solid var(--color-primary);
+        padding-left: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+        font-style: italic;
+        color: var(--color-tertiary);
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        color: var(--color-secondary);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-lg);
+        transition: var(--transition);
+      }
+
+      .back-link:hover {
+        color: var(--color-primary);
+      }
+
+      /* Footer */
+      .footer {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: var(--spacing-md);
+        text-align: center;
+        color: var(--color-tertiary);
+        font-size: 0.875rem;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .article-meta {
+          flex-direction: column;
+          gap: var(--spacing-xs);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo">veronika.dev</a>
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/blog" class="nav-link">Blog</a></li>
+          <li><a href="/#about" class="nav-link">About</a></li>
+          <li><a href="/#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Article -->
+    <article class="article">
+      <a href="/blog" class="back-link"> ← Back to Blog </a>
+
+      <header class="article-header">
+        <span class="article-category">{post.category}</span>
+        <h1 class="article-title">{post.title}</h1>
+        <div class="article-meta">
+          <span
+            >{
+              new Date(post.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }</span
+          >
+          <span>{post.readTime}</span>
+        </div>
+      </header>
+
+      <div class="article-content">
+        <p>
+          En Google, donde múltiples teams desarrollan productos que
+          eventualmente deben sentirse como una experiencia cohesiva, los design
+          systems no son un lujo; son una necesidad absoluta. Figma se ha
+          convertido en la herramienta central para crear, mantener, y escalar
+          estos systems de manera que bridge efectivamente design y development.
+        </p>
+
+        <h2>Más Allá de Style Guides</h2>
+
+        <p>
+          Muchas organizaciones confunden style guides con design systems. Un
+          style guide es estático; un design system es living, breathing, y
+          evolutivo. Es un ecosystem completo que incluye principles,
+          components, patterns, y guidelines que gobiernan cómo se crea y
+          mantiene product experiences.
+        </p>
+
+        <blockquote>
+          "Un design system exitoso es como un lenguaje shared: permite
+          communication clara, efficient collaboration, y consistent expression
+          across todas las touchpoints del producto."
+        </blockquote>
+
+        <h3>Los Componentes de un Design System Robusto</h3>
+
+        <p>
+          <strong>1. Design Tokens:</strong> La foundation de todo design system.
+          Colors, typography, spacing, shadows - todo defined como variables que
+          pueden ser consumed tanto por designers como developers.
+        </p>
+
+        <p>
+          <strong>2. Component Library:</strong> Reusable UI components con clear
+          behavioral specifications, accessibility guidelines, y responsive considerations.
+        </p>
+
+        <p>
+          <strong>3. Pattern Library:</strong> Larger compositions que show cómo
+          components work together para solve common user workflows.
+        </p>
+
+        <p>
+          <strong>4. Documentation:</strong> Living documentation que explica no
+          solo cómo usar components, sino cuándo y por qué.
+        </p>
+
+        <h2>Figma como Design System Hub</h2>
+
+        <p>
+          Figma revolucionó cómo trabajamos con design systems porque solve el
+          fundamental problem de version control y collaboration en design:
+        </p>
+
+        <h3>Component Architecture</h3>
+
+        <p>
+          En Figma, creo master components que se behavior como building blocks.
+          Cada component tiene variants para different states (hover, active,
+          disabled), sizes (small, medium, large), y configurations
+          (with/without icons, different content types).
+        </p>
+
+        <p>
+          La key es thinking systematically desde el primer component. ¿Qué
+          properties van a vary? ¿Cómo va a scale este component? ¿Qué
+          accessibility considerations necesito embedded desde el design phase?
+        </p>
+
+        <h3>Auto Layout y Constraints</h3>
+
+        <p>
+          Auto Layout en Figma mirrors cómo CSS Flexbox y Grid work en
+          development. Cuando design components con proper Auto Layout, están
+          naturalmente responsive y behave de manera predictable cuando content
+          changes.
+        </p>
+
+        <p>
+          Uso constraints inteligentemente para ensure que components maintain
+          their intended proportions y positioning across different screen
+          sizes, making the handoff to development much smoother.
+        </p>
+
+        <h2>Bridging Design y Development</h2>
+
+        <p>
+          El biggest challenge en design systems es maintaining consistency
+          entre lo que designers create en Figma y lo que developers implement
+          en código. Aquí es donde mi background tanto en design como en
+          development es invaluable:
+        </p>
+
+        <h3>Design Tokens Implementation</h3>
+
+        <p>
+          Trabajo closely con developers para ensure que design tokens en Figma
+          correspondan exactamente con CSS variables o style dictionaries en el
+          codebase. Tools como Style Dictionary o Figma Tokens permiten
+          automatic synchronization entre design y code.
+        </p>
+
+        <h3>Component API Design</h3>
+
+        <p>
+          Cuando design components en Figma, pienso en términos de APIs. ¿Qué
+          props va a receive este component? ¿Cuáles son los default values?
+          ¿Cómo va a handle edge cases?
+        </p>
+
+        <p>
+          Esta approach significa que cuando developers implement el component
+          en Angular o React, la structure y behavior ya están clearly defined,
+          reducing ambiguity y implementation time.
+        </p>
+
+        <h2>Scaling Design Systems</h2>
+
+        <h3>Versioning y Evolution</h3>
+
+        <p>
+          Design systems need to evolve sin breaking existing implementations.
+          En Figma, uso branching para experiment con changes, y semantic
+          versioning para communicate el impact de updates.
+        </p>
+
+        <p>
+          Major version changes might include breaking changes que require code
+          updates. Minor versions add new functionality sin affecting existing
+          usage. Patch versions fix bugs o improve performance.
+        </p>
+
+        <h3>Adoption Strategies</h3>
+
+        <p>
+          El most sophisticated design system es useless si teams no lo adopt.
+          Focus on:
+        </p>
+
+        <p>
+          <strong>Progressive Enhancement:</strong> Start con core components que
+          address immediate pain points. Build momentum con quick wins antes de tackling
+          más complex patterns.
+        </p>
+
+        <p>
+          <strong>Education y Training:</strong> Regular workshops, office hours,
+          y documentation updates ensure que teams understand not just cómo usar
+          el system, sino por qué exists.
+        </p>
+
+        <p>
+          <strong>Contribution Model:</strong> Create clear pathways para teams a
+          contribute back al system. Este distributed ownership model scales better
+          que centralized control.
+        </p>
+
+        <h2>Measuring Design System Success</h2>
+
+        <p>
+          En Google, medimos design system success through multiple metrics:
+        </p>
+
+        <h3>Adoption Metrics</h3>
+
+        <p>
+          <strong>Component Usage:</strong> Tracking cuántas instances de cada component
+          están en use across products.
+        </p>
+
+        <p>
+          <strong>Coverage:</strong> Percentage de UI elements que use design system
+          components versus custom implementations.
+        </p>
+
+        <h3>Efficiency Metrics</h3>
+
+        <p>
+          <strong>Design Velocity:</strong> Time to create new screens o features
+          using design system components.
+        </p>
+
+        <p>
+          <strong>Development Velocity:</strong> Reduction en development time para
+          implementing designs que use system components.
+        </p>
+
+        <h3>Quality Metrics</h3>
+
+        <p>
+          <strong>Consistency Scores:</strong> Automated tools que scan designs y
+          code para identify inconsistencies with design system standards.
+        </p>
+
+        <p>
+          <strong>Accessibility Compliance:</strong> Percentage de components que
+          meet WCAG guidelines out-of-the-box.
+        </p>
+
+        <h2>Advanced Figma Techniques</h2>
+
+        <h3>Component Props y Boolean Logic</h3>
+
+        <p>
+          Figma's component properties permiten creating highly configurable
+          components que mirror cómo components work en development. Boolean
+          properties, text overrides, y instance swapping create powerful,
+          flexible building blocks.
+        </p>
+
+        <h3>Interactive Prototyping</h3>
+
+        <p>
+          Uso Figma's prototyping features para demonstrate component behavior,
+          micro-interactions, y user flows. Esto helps developers understand
+          intended interactions sin requiring detailed specifications.
+        </p>
+
+        <h2>Future of Design Systems</h2>
+
+        <p>
+          AI está starting to impact design systems through automated component
+          generation, intelligent suggestions para improvements, y automated
+          accessibility testing.
+        </p>
+
+        <p>
+          Tools como Figma's AI features y emerging platforms van a make design
+          systems more intelligent, self-healing, y adaptive to user needs.
+        </p>
+
+        <p>
+          Design systems representan el future de scalable design y development.
+          Cuando done correctly, eliminate redundant work, improve consistency,
+          y enable teams a focus on solving unique user problems rather than
+          rebuilding basic UI elements.
+        </p>
+
+        <p>
+          En mi experience, el most successful design systems are those que
+          balance structure con flexibility, providing clear guidelines mientras
+          enabling creative expression within defined boundaries. Figma gives us
+          the tools; la discipline y strategic thinking turn those tools into
+          transformative business assets.
+        </p>
+      </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        &copy; {currentYear} Veronika Flores. Crafted with passion using Astro.
+      </p>
+    </footer>
+  </body>
+</html>

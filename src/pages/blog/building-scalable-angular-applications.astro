@@ -1,0 +1,456 @@
+---
+const currentYear = new Date().getFullYear();
+const post = {
+  title: "Building Scalable Angular Applications",
+  date: "2024-12-10",
+  readTime: "8 min read",
+  category: "Development",
+  excerpt:
+    "Best practices for creating Angular applications that grow with your team and user base.",
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={post.excerpt} />
+
+    <!-- Ultra-modern typography from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{post.title} • Veronika Flores</title>
+
+    <style>
+      :root {
+        --color-primary: #000000;
+        --color-secondary: #404040;
+        --color-tertiary: #808080;
+        --color-accent: #f5f5f5;
+        --color-background: #ffffff;
+        --color-surface: #fafafa;
+        --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-mono: "JetBrains Mono", "Courier New", monospace;
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 2rem;
+        --spacing-lg: 4rem;
+        --spacing-xl: 6rem;
+        --border-radius: 2px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        font-family: var(--font-primary);
+        font-size: 16px;
+        line-height: 1.6;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--color-background);
+        color: var(--color-primary);
+        font-weight: 400;
+      }
+
+      /* Navigation */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-logo {
+        font-family: var(--font-mono);
+        font-weight: 500;
+        font-size: 1.125rem;
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: var(--spacing-md);
+        list-style: none;
+      }
+
+      .nav-link {
+        color: var(--color-secondary);
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+        transition: var(--transition);
+        text-transform: uppercase;
+      }
+
+      .nav-link:hover {
+        color: var(--color-primary);
+      }
+
+      /* Article Layout */
+      .article {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: calc(80px + var(--spacing-xl)) var(--spacing-md)
+          var(--spacing-xl);
+      }
+
+      .article-header {
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .article-category {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: var(--color-surface);
+        border-radius: var(--border-radius);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--color-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .article-title {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        margin-bottom: var(--spacing-sm);
+        line-height: 1.1;
+      }
+
+      .article-meta {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-md);
+        font-size: 0.875rem;
+        color: var(--color-tertiary);
+        font-family: var(--font-mono);
+      }
+
+      .article-content {
+        line-height: 1.8;
+        font-size: 1.125rem;
+      }
+
+      .article-content h2 {
+        font-size: 1.75rem;
+        font-weight: 500;
+        margin: var(--spacing-lg) 0 var(--spacing-md);
+        color: var(--color-primary);
+      }
+
+      .article-content h3 {
+        font-size: 1.375rem;
+        font-weight: 500;
+        margin: var(--spacing-md) 0 var(--spacing-sm);
+        color: var(--color-primary);
+      }
+
+      .article-content p {
+        margin-bottom: var(--spacing-md);
+        color: var(--color-secondary);
+      }
+
+      .article-content blockquote {
+        border-left: 3px solid var(--color-primary);
+        padding-left: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+        font-style: italic;
+        color: var(--color-tertiary);
+      }
+
+      .article-content code {
+        background: var(--color-surface);
+        padding: 0.2rem 0.4rem;
+        border-radius: var(--border-radius);
+        font-family: var(--font-mono);
+        font-size: 0.9em;
+        color: var(--color-primary);
+      }
+
+      .article-content pre {
+        background: var(--color-surface);
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        overflow-x: auto;
+        margin: var(--spacing-md) 0;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        color: var(--color-secondary);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-lg);
+        transition: var(--transition);
+      }
+
+      .back-link:hover {
+        color: var(--color-primary);
+      }
+
+      /* Footer */
+      .footer {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: var(--spacing-md);
+        text-align: center;
+        color: var(--color-tertiary);
+        font-size: 0.875rem;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .article-meta {
+          flex-direction: column;
+          gap: var(--spacing-xs);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/" class="nav-logo">veronika.dev</a>
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/blog" class="nav-link">Blog</a></li>
+          <li><a href="/#about" class="nav-link">About</a></li>
+          <li><a href="/#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Article -->
+    <article class="article">
+      <a href="/blog" class="back-link"> ← Back to Blog </a>
+
+      <header class="article-header">
+        <span class="article-category">{post.category}</span>
+        <h1 class="article-title">{post.title}</h1>
+        <div class="article-meta">
+          <span
+            >{
+              new Date(post.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }</span
+          >
+          <span>{post.readTime}</span>
+        </div>
+      </header>
+
+      <div class="article-content">
+        <p>
+          En Google, trabajamos con Angular applications que deben servir a
+          millones de usuarios diariamente. La escalabilidad no es solo una
+          característica nice-to-have, es una necesidad crítica. Después de 3+
+          años desarrollando y optimizando aplicaciones Angular enterprise, he
+          identificado los patrones clave para construir aplicaciones
+          verdaderamente escalables.
+        </p>
+
+        <h2>Arquitectura Modular desde el Inicio</h2>
+
+        <p>
+          El error más común que veo en equipos de desarrollo es construir una
+          aplicación monolítica y esperar poder modularizarla después. La
+          arquitectura modular debe ser una decisión desde el día uno.
+        </p>
+
+        <h3>Feature Modules</h3>
+
+        <p>
+          Cada funcionalidad debe vivir en su propio módulo con
+          responsabilidades claramente definidas. Esto no solo mejora la
+          organización del código, sino que habilita lazy loading y reduce el
+          bundle size inicial.
+        </p>
+        <pre><code>// feature.module.ts
+@NgModule(&#123;
+  declarations: [FeatureComponent],
+  imports: [
+    CommonModule,
+    FeatureRoutingModule,
+    SharedModule
+  ],
+  providers: [FeatureService]
+&#125;)
+export class FeatureModule &#123; &#125;</code></pre>
+
+        <h3>Shared Modules Inteligentes</h3>
+
+        <p>
+          Los shared modules deben contener componentes, directivas y pipes que
+          se reutilizan a través de la aplicación. Pero cuidado: un shared
+          module que crece demasiado puede convertirse en un anti-pattern.
+        </p>
+
+        <h2>State Management con NgRx</h2>
+
+        <p>
+          Para aplicaciones complejas, un state management robusto es crucial.
+          NgRx no es overhead; es inversión en maintainability.
+        </p>
+
+        <blockquote>
+          "La complejidad del state management escala exponencialmente con el
+          tamaño de la aplicación. NgRx convierte esta curva exponencial en una
+          línea recta."
+        </blockquote>
+
+        <h3>Implementación Práctica</h3>
+        <pre><code>// user.effects.ts
+@Injectable()
+export class UserEffects &#123;
+  loadUsers$ = createEffect(() =&gt;
+    this.actions$.pipe(
+      ofType(UserActions.loadUsers),
+      switchMap(() =&gt;
+        this.userService.getUsers().pipe(
+          map(users =&gt; UserActions.loadUsersSuccess(&#123; users &#125;)),
+          catchError(error =&gt; of(UserActions.loadUsersFailure(&#123; error &#125;)))
+        )
+      )
+    )
+  );
+&#125;</code></pre>
+
+        <h2>Performance Optimization Strategies</h2>
+
+        <p>
+          <strong>OnPush Change Detection:</strong> Usar OnPush change detection
+          strategy en componentes que manejan data inmutable puede mejorar el performance
+          significativamente.
+        </p>
+
+        <p>
+          <strong>Lazy Loading + Preloading:</strong> Combinar lazy loading con preloading
+          strategies permite cargar solo lo necesario inicialmente, mientras se precargan
+          módulos probables de usar.
+        </p>
+
+        <p>
+          <strong>Virtual Scrolling:</strong> Para listas grandes, virtual scrolling
+          es esencial. Angular CDK provee excelentes herramientas para esto.
+        </p>
+
+        <h2>Testing Strategy</h2>
+
+        <p>
+          Una aplicación escalable requiere una testing strategy robusta. Uso
+          una pirámide de testing que prioriza unit tests, complementados con
+          integration tests y algunos e2e tests críticos.
+        </p>
+
+        <h3>Component Testing Best Practices</h3>
+        <pre><code>// component.spec.ts
+describe('UserComponent', () =&gt; &#123;
+  let component: UserComponent;
+  let fixture: ComponentFixture&lt;UserComponent&gt;;
+  let mockUserService: jasmine.SpyObj&lt;UserService&gt;;
+
+  beforeEach(() =&gt; &#123;
+    const spy = jasmine.createSpyObj('UserService', ['getUsers']);
+    
+    TestBed.configureTestingModule(&#123;
+      declarations: [UserComponent],
+      providers: [&#123; provide: UserService, useValue: spy &#125;]
+    &#125;);
+    
+    mockUserService = TestBed.inject(UserService) as jasmine.SpyObj&lt;UserService&gt;;
+  &#125;);
+&#125;);</code></pre>
+
+        <h2>DevOps Integration</h2>
+
+        <p>
+          Como DevOps Engineer, entiendo que el código debe ser deployable desde
+          el primer commit. Configurar CI/CD pipelines que incluyan testing,
+          linting, y automated deployments es crucial para escalabilidad.
+        </p>
+
+        <p>
+          <strong>Docker Containers:</strong> Containerizar la aplicación Angular
+          garantiza consistency entre environments.
+        </p>
+
+        <p>
+          <strong>Environment Configuration:</strong> Usar Angular environments correctamente
+          permite la misma codebase en multiple environments sin modificaciones.
+        </p>
+
+        <h2>Monitoreo y Observabilidad</h2>
+
+        <p>
+          Una aplicación escalable necesita telemetría. Implementar error
+          tracking, performance monitoring y user analytics desde el inicio
+          permite tomar decisiones basadas en data real.
+        </p>
+
+        <p>
+          En Google, usamos métricas como Core Web Vitals y custom performance
+          markers para asegurar que la experiencia del usuario se mantenga
+          óptima mientras la aplicación crece.
+        </p>
+
+        <p>
+          La escalabilidad en Angular no es un accidente; es el resultado de
+          decisiones arquitecturales deliberadas y consistent implementation de
+          best practices. Cada línea de código debe escribirse pensando en el
+          futuro de la aplicación.
+        </p>
+      </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        &copy; {currentYear} Veronika Flores. Crafted with passion using Astro.
+      </p>
+    </footer>
+  </body>
+</html>
