@@ -32,7 +32,7 @@ const post = {
     in microservices.
   </p>
   <pre><code>func handleRequests() &#123;
-    for i := 0; i < 1000; i++ &#123;
+    for i := 0; i &lt; 1000; i++ &#123;
         go func(id int) &#123;
             // Each goroutine handles its own work
             processRequest(id)
