@@ -67,16 +67,106 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    <meta name="generator" content={Astro.generator} />
     <meta
       name="description"
-      content="Thoughts and insights from Veronika Flores on UX/UI design, development, and the intersection of technology and creativity."
+      content="Thoughts and insights from Veronika Flores on UX/UI design, development, DevOps, and the intersection of technology and creativity. Read about Angular, Go, Figma, and modern development practices."
     />
     <meta
       name="keywords"
-      content="UX Design Blog, UI Development, Angular, Go, DevOps, Design Systems, Tech Blog"
+      content="UX Design Blog, UI Development, Angular, Go, DevOps, Design Systems, Tech Blog, Veronika Flores, Google Engineer, Figma, JavaScript, TypeScript"
     />
+    <meta name="author" content="Veronika Flores" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://veronika.dev/blog" />
+    <meta property="og:title" content="Blog - Veronika Flores | UX/UI & DevOps Insights" />
+    <meta property="og:description" content="Thoughts and insights from Veronika Flores on UX/UI design, development, DevOps, and the intersection of technology and creativity." />
+    <meta property="og:image" content="https://veronika.dev/png/me_posing_front_google_office_with_golang_shirt.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Veronika Flores at Google Office" />
+    <meta property="og:site_name" content="Veronika Flores Portfolio" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://veronika.dev/blog" />
+    <meta property="twitter:title" content="Blog - Veronika Flores | UX/UI & DevOps Insights" />
+    <meta property="twitter:description" content="Thoughts and insights from Veronika Flores on UX/UI design, development, DevOps, and the intersection of technology and creativity." />
+    <meta property="twitter:image" content="https://veronika.dev/png/me_posing_front_google_office_with_golang_shirt.png" />
+    <meta property="twitter:image:alt" content="Veronika Flores at Google Office" />
+
+    <!-- LinkedIn -->
+    <meta property="article:author" content="Veronika Flores" />
+    <meta property="article:publisher" content="https://www.linkedin.com/in/veronika-flores-8b469136b/" />
+      <!-- Canonical URL -->
+    <link rel="canonical" href="https://veronika.dev/blog" />
+    
+    <!-- Structured Data (JSON-LD) for Blog -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Veronika Flores Blog",
+        "description": "Thoughts and insights from Veronika Flores on UX/UI design, development, DevOps, and the intersection of technology and creativity.",
+        "url": "https://veronika.dev/blog",
+        "author": {
+          "@type": "Person",
+          "name": "Veronika Flores",
+          "url": "https://veronika.dev",
+          "image": "https://veronika.dev/png/me_posing_front_google_office_with_golang_shirt.png",
+          "jobTitle": "UX/UI Engineer & DevOps Specialist",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Google"
+          }
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Veronika Flores",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://veronika.dev/favicon.svg"
+          }
+        },
+        "blogPost": [
+          {
+            "@type": "BlogPosting",
+            "headline": "The Art of Minimal UX Design",
+            "url": "https://veronika.dev/blog/the-art-of-minimal-ux-design",
+            "datePublished": "2024-12-15",
+            "author": {
+              "@type": "Person",
+              "name": "Veronika Flores"
+            }
+          },
+          {
+            "@type": "BlogPosting",
+            "headline": "Building Scalable Angular Applications",
+            "url": "https://veronika.dev/blog/building-scalable-angular-applications",
+            "datePublished": "2024-12-10",
+            "author": {
+              "@type": "Person",
+              "name": "Veronika Flores"
+            }
+          },
+          {
+            "@type": "BlogPosting",
+            "headline": "My Journey from Mexico to Google",
+            "url": "https://veronika.dev/blog/my-journey-from-mexico-to-google",
+            "datePublished": "2024-12-05",
+            "author": {
+              "@type": "Person",
+              "name": "Veronika Flores"
+            }
+          }
+        ]
+      }
+    </script>
 
     <!-- Ultra-modern typography from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -118,12 +208,19 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
         font-size: 16px;
         line-height: 1.6;
         scroll-behavior: smooth;
-      }
-
-      body {
+      }      body {
         background-color: var(--color-background);
         color: var(--color-primary);
         font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Improve text readability on all devices */
+      @media (max-width: 768px) {
+        body {
+          text-rendering: optimizeSpeed;
+        }
       }
 
       /* Navigation */
@@ -327,23 +424,412 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
         text-align: center;
         color: var(--color-tertiary);
         font-size: 0.875rem;
+      }      /* Ultra Responsive Design */
+      
+      /* Large Desktop (1400px+) */
+      @media (min-width: 1400px) {
+        .hero,
+        .filters,
+        .blog-grid {
+          max-width: 1400px;
+          margin: 0 auto;
+        }
+
+        .blog-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: var(--spacing-xl);
+        }
       }
 
-      /* Responsive Design */
-      @media (max-width: 768px) {
+      /* Desktop (1024px - 1399px) */
+      @media (max-width: 1399px) and (min-width: 1024px) {
+        .blog-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--spacing-lg);
+        }
+      }
+
+      /* Tablet Landscape (900px - 1023px) */
+      @media (max-width: 1023px) and (min-width: 900px) {
+        .hero-title {
+          font-size: clamp(2rem, 5vw, 3rem);
+        }
+
+        .hero-subtitle {
+          font-size: clamp(1rem, 2.5vw, 1.15rem);
+        }
+
+        .blog-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--spacing-md);
+          padding: 0 var(--spacing-sm) var(--spacing-lg);
+        }
+
+        .blog-post {
+          min-height: 280px;
+        }
+      }
+
+      /* Tablet Portrait (768px - 899px) */
+      @media (max-width: 899px) and (min-width: 768px) {
+        .nav-container {
+          padding: 0 var(--spacing-sm);
+        }
+
         .nav-links {
-          display: none;
+          gap: var(--spacing-sm);
+        }
+
+        .nav-link {
+          font-size: 0.8rem;
+        }
+
+        .hero {
+          padding: calc(80px + var(--spacing-lg)) var(--spacing-sm) var(--spacing-lg);
+        }
+
+        .hero-title {
+          font-size: clamp(1.8rem, 5vw, 2.5rem);
+        }
+
+        .hero-subtitle {
+          font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+        }
+
+        .filters {
+          padding: 0 var(--spacing-sm) var(--spacing-md);
+        }
+
+        .filter-buttons {
+          gap: var(--spacing-xs);
+          justify-content: flex-start;
+          overflow-x: auto;
+          padding-bottom: var(--spacing-xs);
+        }
+
+        .filter-btn {
+          flex-shrink: 0;
+          font-size: 0.8rem;
+          padding: var(--spacing-xs) var(--spacing-sm);
         }
 
         .blog-grid {
           grid-template-columns: 1fr;
           gap: var(--spacing-md);
+          padding: 0 var(--spacing-sm) var(--spacing-lg);
+        }
+
+        .blog-post {
+          padding: var(--spacing-sm);
+        }
+
+        .post-title {
+          font-size: 1.3rem;
+        }
+
+        .coming-soon {
+          padding: var(--spacing-lg) var(--spacing-sm);
+        }
+      }
+
+      /* Mobile Landscape & Large Mobile (480px - 767px) */
+      @media (max-width: 767px) and (min-width: 480px) {
+        .nav {
+          padding: var(--spacing-xs) var(--spacing-sm);
+        }
+
+        .nav-container {
+          flex-direction: row;
+          justify-content: space-between;
+        }
+
+        .nav-logo {
+          font-size: 1rem;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: var(--spacing-xs);
+        }
+
+        .nav-link {
+          font-size: 0.75rem;
+          padding: var(--spacing-xs);
+        }
+
+        .hero {
+          padding: calc(80px + var(--spacing-md)) var(--spacing-sm) var(--spacing-md);
+          text-align: center;
+        }
+
+        .hero-title {
+          font-size: clamp(1.6rem, 6vw, 2.2rem);
+          margin-bottom: var(--spacing-xs);
+        }
+
+        .hero-subtitle {
+          font-size: clamp(0.9rem, 2.8vw, 1rem);
+          line-height: 1.5;
+        }
+
+        .filters {
+          padding: 0 var(--spacing-sm) var(--spacing-sm);
         }
 
         .filter-buttons {
           justify-content: flex-start;
           overflow-x: auto;
+          gap: var(--spacing-xs);
           padding-bottom: var(--spacing-xs);
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .filter-buttons::-webkit-scrollbar {
+          display: none;
+        }
+
+        .filter-btn {
+          flex-shrink: 0;
+          font-size: 0.75rem;
+          padding: 0.4rem 0.8rem;
+          white-space: nowrap;
+        }
+
+        .blog-grid {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-sm);
+          padding: 0 var(--spacing-sm) var(--spacing-md);
+        }
+
+        .blog-post {
+          padding: var(--spacing-sm);
+        }
+
+        .post-category {
+          font-size: 0.7rem;
+          padding: 0.2rem 0.6rem;
+        }
+
+        .post-title {
+          font-size: 1.2rem;
+          line-height: 1.3;
+        }
+
+        .post-excerpt {
+          font-size: 0.9rem;
+          line-height: 1.5;
+        }
+
+        .post-meta {
+          font-size: 0.8rem;
+          flex-direction: column;
+          gap: 0.25rem;
+          align-items: flex-start;
+        }
+
+        .coming-soon {
+          padding: var(--spacing-md) var(--spacing-sm);
+        }
+
+        .coming-soon h3 {
+          font-size: 1.2rem;
+        }
+
+        .coming-soon p {
+          font-size: 0.9rem;
+        }
+      }
+
+      /* Small Mobile (320px - 479px) */
+      @media (max-width: 479px) {
+        .nav {
+          padding: var(--spacing-xs);
+        }
+
+        .nav-container {
+          flex-direction: column;
+          gap: var(--spacing-xs);
+          align-items: center;
+        }
+
+        .nav-logo {
+          font-size: 0.9rem;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: var(--spacing-xs);
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .nav-link {
+          font-size: 0.7rem;
+          padding: 0.25rem 0.5rem;
+        }
+
+        .hero {
+          padding: calc(100px + var(--spacing-sm)) var(--spacing-xs) var(--spacing-sm);
+        }
+
+        .hero-title {
+          font-size: clamp(1.4rem, 7vw, 1.8rem);
+          margin-bottom: var(--spacing-xs);
+        }
+
+        .hero-subtitle {
+          font-size: clamp(0.8rem, 3.2vw, 0.9rem);
+          line-height: 1.4;
+        }
+
+        .filters {
+          padding: 0 var(--spacing-xs) var(--spacing-sm);
+        }
+
+        .filter-buttons {
+          justify-content: flex-start;
+          overflow-x: auto;
+          gap: 0.25rem;
+          padding-bottom: var(--spacing-xs);
+        }
+
+        .filter-btn {
+          flex-shrink: 0;
+          font-size: 0.7rem;
+          padding: 0.3rem 0.6rem;
+          white-space: nowrap;
+        }
+
+        .blog-grid {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-sm);
+          padding: 0 var(--spacing-xs) var(--spacing-sm);
+        }
+
+        .blog-post {
+          padding: var(--spacing-xs);
+        }
+
+        .post-category {
+          font-size: 0.65rem;
+          padding: 0.15rem 0.5rem;
+          margin-bottom: var(--spacing-xs);
+        }
+
+        .post-title {
+          font-size: 1rem;
+          line-height: 1.2;
+          margin-bottom: var(--spacing-xs);
+        }
+
+        .post-excerpt {
+          font-size: 0.85rem;
+          line-height: 1.4;
+          margin-bottom: var(--spacing-xs);
+        }
+
+        .post-meta {
+          font-size: 0.75rem;
+          flex-direction: column;
+          gap: 0.2rem;
+          align-items: flex-start;
+        }
+
+        .coming-soon {
+          padding: var(--spacing-sm) var(--spacing-xs);
+        }
+
+        .coming-soon h3 {
+          font-size: 1rem;
+        }
+
+        .coming-soon p {
+          font-size: 0.85rem;
+          line-height: 1.5;
+        }
+
+        .footer {
+          padding: var(--spacing-sm) var(--spacing-xs);
+          font-size: 0.75rem;
+        }
+      }
+
+      /* Very Small Mobile (under 320px) */
+      @media (max-width: 319px) {
+        .hero-title {
+          font-size: 1.2rem;
+        }
+
+        .hero-subtitle {
+          font-size: 0.75rem;
+        }
+
+        .post-title {
+          font-size: 0.9rem;
+        }
+
+        .nav-container {
+          flex-direction: column;
+        }
+
+        .nav-links {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      /* Landscape orientation optimizations */
+      @media (orientation: landscape) and (max-height: 500px) {
+        .hero {
+          padding: calc(60px + var(--spacing-sm)) var(--spacing-sm) var(--spacing-sm);
+        }
+
+        .hero-title {
+          font-size: 1.5rem;
+        }
+
+        .hero-subtitle {
+          font-size: 0.9rem;
+        }
+      }
+
+      /* High DPI displays */
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .blog-post {
+          border: 0.5px solid rgba(0, 0, 0, 0.05);
+        }
+      }
+
+      /* Reduce motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        .blog-post {
+          transition: none;
+        }
+
+        .blog-post:hover {
+          transform: none;
+        }
+
+        .filter-btn {
+          transition: none;
+        }
+      }
+
+      /* Touch device optimizations */
+      @media (hover: none) and (pointer: coarse) {
+        .blog-post {
+          padding: var(--spacing-sm);
+        }
+
+        .filter-btn {
+          padding: var(--spacing-xs) var(--spacing-sm);
+          min-height: 44px;
+        }
+
+        .blog-post:hover {
+          transform: none;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
       }
 

@@ -7,25 +7,119 @@ const currentYear = new Date().getFullYear();
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    <meta name="generator" content={Astro.generator} />
     <meta
       name="description"
       content="Veronika Flores - UX/UI Engineer & DevOps Specialist at Google California. 3+ years experience in Go, Angular, Figma, and user-centered design."
     />
     <meta
       name="keywords"
-      content="UX/UI Engineer, DevOps, Google, Angular, Go, Figma, Tailwind CSS, Frontend Developer"
+      content="UX/UI Engineer, DevOps, Google, Angular, Go, Figma, Tailwind CSS, Frontend Developer, Veronika Flores, Mexico California, Tech Professional"
     />
+    <meta name="author" content="Veronika Flores" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://veronika.dev/" />
     <meta
       property="og:title"
-      content="Veronika Flores - UX/UI Engineer & DevOps"
+      content="Veronika Flores - UX/UI Engineer & DevOps Specialist at Google"
     />
     <meta
       property="og:description"
-      content="Professional portfolio of Veronika Flores, UX/UI Engineer & DevOps Specialist at Google California"
+      content="Professional portfolio of Veronika Flores, UX/UI Engineer & DevOps Specialist at Google California. 3+ years experience in Go, Angular, Figma, and user-centered design."
     />
-    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://veronika.dev/png/me_posing_front_google_office_with_golang_shirt.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Veronika Flores at Google Office" />
+    <meta property="og:site_name" content="Veronika Flores Portfolio" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://veronika.dev/" />
+    <meta property="twitter:title" content="Veronika Flores - UX/UI Engineer & DevOps Specialist at Google" />
+    <meta property="twitter:description" content="Professional portfolio of Veronika Flores, UX/UI Engineer & DevOps Specialist at Google California. 3+ years experience in Go, Angular, Figma, and user-centered design." />
+    <meta property="twitter:image" content="https://veronika.dev/png/me_posing_front_google_office_with_golang_shirt.png" />
+    <meta property="twitter:image:alt" content="Veronika Flores at Google Office" />
+
+    <!-- LinkedIn -->
+    <meta property="article:author" content="Veronika Flores" />
+    <meta property="article:publisher" content="https://www.linkedin.com/in/veronika-flores-8b469136b/" />    <!-- Canonical URL -->
+    <link rel="canonical" href="https://veronika.dev/" />
+    
+    <!-- Additional SEO -->
+    <link rel="sitemap" href="/sitemap.xml" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    
+    <!-- Performance & Security -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="msapplication-TileColor" content="#000000" />
+      <!-- Prefetch DNS for external resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Veronika Flores",
+        "jobTitle": "UX/UI Engineer & DevOps Specialist",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Google",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "California",
+            "addressCountry": "US"
+          }
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "California",
+          "addressCountry": "US"
+        },
+        "nationality": "Mexican",
+        "url": "https://veronika.dev",
+        "image": "https://veronika.dev/png/me_posing_front_google_office_with_golang_shirt.png",
+        "sameAs": [
+          "https://github.com/VeronikkAhri",
+          "https://www.linkedin.com/in/veronika-flores-8b469136b/",
+          "https://www.tiktok.com/@deveronikkahri"
+        ],
+        "knowsAbout": [
+          "UX Design",
+          "UI Development",
+          "DevOps",
+          "Angular",
+          "Go Programming",
+          "Figma",
+          "Google Cloud Platform",
+          "Kubernetes",
+          "TypeScript",
+          "CSS",
+          "Tailwind CSS",
+          "Design Systems"
+        ],
+        "description": "UX/UI Engineer & DevOps Specialist at Google California with 3+ years experience in Go, Angular, Figma, and user-centered design.",
+        "hasCredential": [
+          {
+            "@type": "EducationalOccupationalCredential",
+            "name": "UX Design Certification"
+          },
+          {
+            "@type": "EducationalOccupationalCredential", 
+            "name": "Google Cloud Certification"
+          }
+        ]
+      }
+    </script>
 
     <!-- Ultra-modern typography from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -69,13 +163,20 @@ const currentYear = new Date().getFullYear();
         font-size: 16px;
         line-height: 1.6;
         scroll-behavior: smooth;
-      }
-
-      body {
+      }      body {
         background-color: var(--color-background);
         color: var(--color-primary);
         font-weight: 400;
         overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Improve text readability on all devices */
+      @media (max-width: 768px) {
+        body {
+          text-rendering: optimizeSpeed;
+        }
       }
 
       /* Hero Section with Video Background */
@@ -86,9 +187,7 @@ const currentYear = new Date().getFullYear();
         align-items: center;
         justify-content: center;
         overflow: hidden;
-      }
-
-      .hero-video {
+      }      .hero-video {
         position: absolute;
         top: 0;
         left: 0;
@@ -99,6 +198,19 @@ const currentYear = new Date().getFullYear();
         z-index: -2;
         opacity: 1;
         filter: brightness(0.9) contrast(1.2) saturate(0.8);
+      }
+
+      /* Responsive video positioning */
+      @media (max-width: 768px) {
+        .hero-video {
+          object-position: center center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-video {
+          object-position: 30% center;
+        }
       }
 
       .hero-overlay {
@@ -262,19 +374,34 @@ const currentYear = new Date().getFullYear();
         grid-template-columns: 1fr 2fr;
         gap: var(--spacing-lg);
         align-items: center;
-      }
-
-      .about-image {
+      }      .about-image {
         width: 100%;
         height: 400px;
         object-fit: cover;
         border-radius: var(--border-radius);
         filter: grayscale(100%);
         transition: var(--transition);
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
       }
 
       .about-image:hover {
         filter: grayscale(0%);
+      }
+
+      /* Responsive image sizing */
+      @media (max-width: 768px) {
+        .about-image {
+          height: 300px;
+          max-width: 300px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .about-image {
+          height: 250px;
+          max-width: 250px;
+        }
       }
 
       .about-content h3 {
@@ -478,25 +605,489 @@ const currentYear = new Date().getFullYear();
         text-align: center;
         color: var(--color-tertiary);
         font-size: 0.875rem;
+      }      /* Ultra Responsive Design */
+      
+      /* Large Desktop (1400px+) */
+      @media (min-width: 1400px) {
+        .section {
+          max-width: 1400px;
+          padding: var(--spacing-xl) var(--spacing-lg);
+        }
+
+        .hero-content {
+          max-width: 1000px;
+        }
+
+        .about-grid {
+          gap: var(--spacing-xl);
+        }
+
+        .skills-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
       }
 
-      /* Responsive Design */
-      @media (max-width: 768px) {
-        .nav-links {
-          display: none;
+      /* Desktop (1024px - 1399px) */
+      @media (max-width: 1399px) and (min-width: 1024px) {
+        .section {
+          padding: var(--spacing-xl) var(--spacing-md);
         }
 
-        .about-grid,
+        .skills-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* Tablet Landscape (900px - 1023px) */
+      @media (max-width: 1023px) and (min-width: 900px) {
+        .hero-title {
+          font-size: clamp(3.5rem, 7vw, 5rem);
+        }
+
+        .hero-subtitle {
+          font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        }
+
+        .hero-description {
+          font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+
+        .about-grid {
+          grid-template-columns: 1fr 1.5fr;
+          gap: var(--spacing-lg);
+        }
+
+        .skills-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--spacing-md);
+        }
+
         .contact-grid {
-          grid-template-columns: 1fr;
+          gap: var(--spacing-md);
+        }
+      }
+
+      /* Tablet Portrait (768px - 899px) */
+      @media (max-width: 899px) and (min-width: 768px) {
+        .nav-container {
+          padding: 0 var(--spacing-sm);
         }
 
-        .about-stats {
-          grid-template-columns: repeat(3, 1fr);
+        .nav-links {
+          gap: var(--spacing-sm);
+        }
+
+        .nav-link {
+          font-size: 0.8rem;
+        }
+
+        .hero {
+          height: 90vh;
+          min-height: 600px;
+        }
+
+        .hero-content {
+          padding: var(--spacing-sm);
+        }
+
+        .hero-title {
+          font-size: clamp(3rem, 8vw, 4.5rem);
+          margin-bottom: var(--spacing-xs);
+        }
+
+        .hero-subtitle {
+          font-size: clamp(1rem, 2.5vw, 1.3rem);
+          margin-bottom: var(--spacing-sm);
+        }
+
+        .hero-description {
+          font-size: clamp(0.95rem, 2vw, 1.15rem);
+          margin-bottom: var(--spacing-md);
         }
 
         .section {
           padding: var(--spacing-lg) var(--spacing-sm);
+        }
+
+        .section-title {
+          font-size: clamp(2rem, 5vw, 2.8rem);
+          margin-bottom: var(--spacing-md);
+        }
+
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-md);
+          text-align: center;
+        }
+
+        .about-image {
+          max-width: 300px;
+          height: 300px;
+          margin: 0 auto;
+        }
+
+        .about-stats {
+          justify-content: center;
+          max-width: 400px;
+          margin: var(--spacing-md) auto 0;
+        }
+
+        .skills-grid {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-sm);
+        }
+
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-md);
+        }
+      }
+
+      /* Mobile Landscape & Large Mobile (480px - 767px) */
+      @media (max-width: 767px) and (min-width: 480px) {
+        .nav {
+          padding: var(--spacing-xs) var(--spacing-sm);
+        }
+
+        .nav-container {
+          flex-direction: row;
+          justify-content: space-between;
+        }
+
+        .nav-logo {
+          font-size: 1rem;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: var(--spacing-xs);
+        }
+
+        .nav-link {
+          font-size: 0.75rem;
+          padding: var(--spacing-xs);
+        }
+
+        .hero {
+          height: 80vh;
+          min-height: 500px;
+        }
+
+        .hero-content {
+          padding: var(--spacing-sm);
+        }
+
+        .hero-title {
+          font-size: clamp(2.5rem, 9vw, 3.5rem);
+          line-height: 0.85;
+        }
+
+        .hero-subtitle {
+          font-size: clamp(0.9rem, 3vw, 1.1rem);
+          margin-bottom: var(--spacing-sm);
+        }
+
+        .hero-description {
+          font-size: clamp(0.9rem, 2.5vw, 1rem);
+          margin-bottom: var(--spacing-sm);
+          max-width: 90%;
+        }
+
+        .hero-cta {
+          padding: var(--spacing-xs) var(--spacing-sm);
+          font-size: 0.8rem;
+        }
+
+        .section {
+          padding: var(--spacing-md) var(--spacing-sm);
+        }
+
+        .section-title {
+          font-size: clamp(1.8rem, 6vw, 2.5rem);
+        }
+
+        .about-content h3 {
+          font-size: 1.2rem;
+        }
+
+        .about-content p {
+          font-size: 0.9rem;
+        }
+
+        .about-stats {
+          grid-template-columns: repeat(3, 1fr);
+          gap: var(--spacing-xs);
+        }
+
+        .stat-number {
+          font-size: 1.5rem;
+        }
+
+        .stat-label {
+          font-size: 0.75rem;
+        }
+
+        .skill-category {
+          padding: var(--spacing-sm);
+        }
+
+        .skill-category h3 {
+          font-size: 1.1rem;
+        }
+
+        .skill-tag {
+          padding: 0.2rem 0.5rem;
+          font-size: 0.8rem;
+        }
+
+        .contact-info h3 {
+          font-size: 1.2rem;
+        }
+
+        .contact-info p {
+          font-size: 0.9rem;
+        }
+
+        .contact-links a {
+          font-size: 0.8rem;
+        }
+      }
+
+      /* Small Mobile (320px - 479px) */
+      @media (max-width: 479px) {
+        .nav {
+          padding: var(--spacing-xs);
+        }
+
+        .nav-container {
+          flex-direction: column;
+          gap: var(--spacing-xs);
+          align-items: center;
+        }
+
+        .nav-logo {
+          font-size: 0.9rem;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: var(--spacing-xs);
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .nav-link {
+          font-size: 0.7rem;
+          padding: 0.25rem 0.5rem;
+        }
+
+        .hero {
+          height: 75vh;
+          min-height: 450px;
+          padding-top: 100px;
+        }
+
+        .hero-content {
+          padding: var(--spacing-xs);
+        }
+
+        .hero-title {
+          font-size: clamp(2rem, 10vw, 2.8rem);
+          line-height: 0.8;
+          margin-bottom: var(--spacing-xs);
+        }
+
+        .hero-subtitle {
+          font-size: clamp(0.8rem, 3.5vw, 1rem);
+          margin-bottom: var(--spacing-xs);
+          line-height: 1.2;
+        }
+
+        .hero-description {
+          font-size: clamp(0.8rem, 2.8vw, 0.9rem);
+          margin-bottom: var(--spacing-sm);
+          line-height: 1.4;
+        }
+
+        .hero-cta {
+          padding: var(--spacing-xs);
+          font-size: 0.75rem;
+          gap: 0.25rem;
+        }
+
+        .section {
+          padding: var(--spacing-sm) var(--spacing-xs);
+        }
+
+        .section-title {
+          font-size: clamp(1.5rem, 7vw, 2rem);
+          margin-bottom: var(--spacing-sm);
+        }
+
+        .about-image {
+          max-width: 250px;
+          height: 250px;
+        }
+
+        .about-content h3 {
+          font-size: 1rem;
+        }
+
+        .about-content p {
+          font-size: 0.85rem;
+          line-height: 1.5;
+        }
+
+        .about-stats {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-xs);
+          max-width: 200px;
+        }
+
+        .stat {
+          padding: var(--spacing-xs);
+        }
+
+        .stat-number {
+          font-size: 1.2rem;
+        }
+
+        .stat-label {
+          font-size: 0.7rem;
+        }
+
+        .skills-grid {
+          gap: var(--spacing-xs);
+        }
+
+        .skill-category {
+          padding: var(--spacing-xs);
+        }
+
+        .skill-category h3 {
+          font-size: 1rem;
+          margin-bottom: var(--spacing-xs);
+        }
+
+        .skill-tags {
+          gap: 0.25rem;
+        }
+
+        .skill-tag {
+          padding: 0.15rem 0.4rem;
+          font-size: 0.7rem;
+        }
+
+        .contact-info h3 {
+          font-size: 1rem;
+        }
+
+        .contact-info p {
+          font-size: 0.85rem;
+        }
+
+        .contact-links {
+          margin-top: var(--spacing-sm);
+        }
+
+        .contact-links li {
+          margin-bottom: var(--spacing-xs);
+        }
+
+        .contact-links a {
+          font-size: 0.75rem;
+          word-break: break-all;
+        }
+
+        .availability {
+          padding: var(--spacing-sm);
+        }
+
+        .availability-status {
+          font-size: 0.85rem;
+        }
+
+        .availability p {
+          font-size: 0.8rem;
+        }
+
+        .footer {
+          padding: var(--spacing-sm) var(--spacing-xs);
+          font-size: 0.75rem;
+        }
+      }
+
+      /* Very Small Mobile (under 320px) */
+      @media (max-width: 319px) {
+        .hero-title {
+          font-size: 1.8rem;
+        }
+
+        .hero-subtitle {
+          font-size: 0.75rem;
+        }
+
+        .hero-description {
+          font-size: 0.75rem;
+        }
+
+        .section-title {
+          font-size: 1.3rem;
+        }
+
+        .about-stats {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-container {
+          flex-direction: column;
+        }
+
+        .nav-links {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      /* Landscape orientation optimizations */
+      @media (orientation: landscape) and (max-height: 500px) {
+        .hero {
+          height: 100vh;
+          min-height: auto;
+        }
+
+        .hero-content {
+          transform: scale(0.9);
+        }
+
+        .section {
+          padding: var(--spacing-md) var(--spacing-sm);
+        }
+      }
+
+      /* High DPI displays */
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .hero-video {
+          image-rendering: -webkit-optimize-contrast;
+        }
+
+        .about-image {
+          image-rendering: -webkit-optimize-contrast;
+        }
+      }
+
+      /* Reduce motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        .hero-content {
+          animation: none;
+        }
+
+        .availability-dot {
+          animation: none;
+        }
+
+        * {
+          transition: none !important;
         }
       }
 
@@ -518,11 +1109,17 @@ const currentYear = new Date().getFullYear();
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
       </div>
-    </nav>
-
-    <!-- Hero Section -->
+    </nav>    <!-- Hero Section -->
     <section class="hero">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <video 
+        class="hero-video" 
+        autoplay 
+        muted 
+        loop 
+        playsinline 
+        preload="auto"
+        poster="/png/me_posing_front_google_office_with_golang_shirt.png"
+      >
         <source src="/mp4/myself_promo_impactful_vide.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
@@ -545,11 +1142,13 @@ const currentYear = new Date().getFullYear();
     <!-- About Section -->
     <section id="about" class="section">
       <h2 class="section-title">About</h2>
-      <div class="about-grid">
-        <img
+      <div class="about-grid">        <img
           src="/png/me_posing_front_google_office_with_golang_shirt.png"
           alt="Veronika at Google Office"
           class="about-image"
+          loading="lazy"
+          width="400"
+          height="400"
         />
         <div class="about-content">
           <h3>Building the Future of Digital Experiences</h3>
