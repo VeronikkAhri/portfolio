@@ -136,35 +136,35 @@ const currentYear = new Date().getFullYear();
 
       .hero-title {
         font-family: var(--font-primary);
-        font-size: clamp(3.5rem, 8vw, 6rem);
-        font-weight: 200;
+        font-size: clamp(4rem, 8.5vw, 6.5rem);
+        font-weight: 600;
         letter-spacing: -0.02em;
         margin-bottom: var(--spacing-sm);
         line-height: 0.9;
         color: var(--color-primary);
-        text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        text-shadow: 0 3px 6px rgba(255, 255, 255, 0.9), 0 1px 3px rgba(0, 0, 0, 0.1);
       }
 
       .hero-subtitle {
         font-family: var(--font-primary);
-        font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-        font-weight: 400;
+        font-size: clamp(1.2rem, 2.8vw, 1.6rem);
+        font-weight: 500;
         color: var(--color-secondary);
         margin-bottom: var(--spacing-md);
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+        text-shadow: 0 2px 4px rgba(255, 255, 255, 0.95), 0 1px 2px rgba(0, 0, 0, 0.1);
       }
 
       .hero-description {
         font-family: var(--font-primary);
-        font-size: clamp(1rem, 2vw, 1.2rem);
+        font-size: clamp(1.1rem, 2.2vw, 1.3rem);
         color: var(--color-secondary);
         max-width: 600px;
         margin: 0 auto var(--spacing-lg);
         line-height: 1.6;
-        font-weight: 300;
-        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+        font-weight: 400;
+        text-shadow: 0 2px 4px rgba(255, 255, 255, 0.95), 0 1px 2px rgba(0, 0, 0, 0.1);
       }
 
       .hero-cta {
@@ -364,13 +364,6 @@ const currentYear = new Date().getFullYear();
         gap: var(--spacing-lg);
       }
 
-      /* Behind the Scenes Section */
-      .behind-scenes-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: var(--spacing-lg);
-      }
-
       .media-item {
         background: var(--color-surface);
         border-radius: var(--border-radius);
@@ -520,7 +513,6 @@ const currentYear = new Date().getFullYear();
         <ul class="nav-links">
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#behind-scenes" class="nav-link">Behind Scenes</a></li>
           <li><a href="/blog" class="nav-link">Blog</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
@@ -640,62 +632,6 @@ const currentYear = new Date().getFullYear();
             <span class="skill-tag">google-cloud</span>
             <span class="skill-tag">design-thinking</span>
             <span class="skill-tag">agile</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Behind the Scenes Section -->
-    <section id="behind-scenes" class="section">
-      <h2 class="section-title">Behind the Scenes</h2>
-      <div class="behind-scenes-grid">
-        <div class="media-item">
-          <video class="media-video" controls playsinline>
-            <source
-              src="/mp4/me_posing_in_office_with_angular_shirt.mp4"
-              type="video/mp4"
-            />
-          </video>
-          <div class="media-content">
-            <h3>Angular Development Life</h3>
-            <p>
-              A glimpse into my daily routine working with Angular at Google.
-              From architecture decisions to code reviews, this is how modern
-              enterprise development happens.
-            </p>
-          </div>
-        </div>
-
-        <div class="media-item">
-          <video class="media-video" controls playsinline>
-            <source
-              src="/mp4/me_selfieprotrait_in_office_with_golang_shirt.mp4"
-              type="video/mp4"
-            />
-          </video>
-          <div class="media-content">
-            <h3>Go Programming Sessions</h3>
-            <p>
-              Backend development with Go at scale. Building robust, performant
-              services that power user experiences for millions of people
-              worldwide.
-            </p>
-          </div>
-        </div>
-
-        <div class="media-item media-image">
-          <img
-            src="/png/me_selfieportrait_in_office_with_golang_shirt.png"
-            alt="Veronika coding with Go"
-            class="media-photo"
-          />
-          <div class="media-content">
-            <h3>Engineering Culture</h3>
-            <p>
-              The intersection of kawaii aesthetic and serious engineering.
-              Proving that personality and professionalism aren't mutually
-              exclusive in the tech industry.
-            </p>
           </div>
         </div>
       </div>
