@@ -17,8 +17,8 @@ const currentYear = new Date().getFullYear();
 
 // Generate slug from title if not provided
 const slug = post.slug || post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-const fullUrl = `https://veronika.dev/blog/${slug}`;
-const defaultImage = "https://veronika.dev/png/me_posing_front_google_office_with_golang_shirt.png";
+const fullUrl = `https://veronikadev.netlify.app/blog/${slug}`;
+const defaultImage = "https://veronikadev.netlify.app/png/me_posing_front_google_office_with_golang_shirt.png";
 ---
 
 <!doctype html>
@@ -77,7 +77,7 @@ const defaultImage = "https://veronika.dev/png/me_posing_front_google_office_wit
         "author": {
           "@type": "Person",
           "name": "Veronika Flores",
-          "url": "https://veronika.dev",
+          "url": "https://veronikadev.netlify.app/",
           "sameAs": [
             "https://github.com/VeronikkAhri",
             "https://www.linkedin.com/in/veronika-flores-8b469136b/",
@@ -89,7 +89,7 @@ const defaultImage = "https://veronika.dev/png/me_posing_front_google_office_wit
           "name": "Veronika Flores",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://veronika.dev/favicon.svg"
+            "url": "https://veronikadev.netlify.app/favicon.svg"
           }
         },
         "datePublished": `${post.date}T00:00:00Z`,

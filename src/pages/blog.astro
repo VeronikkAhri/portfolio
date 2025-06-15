@@ -82,10 +82,10 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://veronika.dev/blog" />
+    <meta property="og:url" content="https://veronikadev.netlify.app/blog" />
     <meta property="og:title" content="Blog - Veronika Flores | UX/UI & DevOps Insights" />
     <meta property="og:description" content="Thoughts and insights from Veronika Flores on UX/UI design, development, DevOps, and the intersection of technology and creativity." />
-    <meta property="og:image" content="https://veronika.dev/png/me_posing_front_google_office_with_golang_shirt.png" />
+    <meta property="og:image" content="https://veronikadev.netlify.app/png/me_posing_front_google_office_with_golang_shirt.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Veronika Flores at Google Office" />
@@ -94,17 +94,17 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://veronika.dev/blog" />
+    <meta property="twitter:url" content="https://veronikadev.netlify.app/blog" />
     <meta property="twitter:title" content="Blog - Veronika Flores | UX/UI & DevOps Insights" />
     <meta property="twitter:description" content="Thoughts and insights from Veronika Flores on UX/UI design, development, DevOps, and the intersection of technology and creativity." />
-    <meta property="twitter:image" content="https://veronika.dev/png/me_posing_front_google_office_with_golang_shirt.png" />
+    <meta property="twitter:image" content="https://veronikadev.netlify.app/png/me_posing_front_google_office_with_golang_shirt.png" />
     <meta property="twitter:image:alt" content="Veronika Flores at Google Office" />
 
     <!-- LinkedIn -->
     <meta property="article:author" content="Veronika Flores" />
     <meta property="article:publisher" content="https://www.linkedin.com/in/veronika-flores-8b469136b/" />
       <!-- Canonical URL -->
-    <link rel="canonical" href="https://veronika.dev/blog" />
+    <link rel="canonical" href="https://veronikadev.netlify.app/blog" />
     
     <!-- Structured Data (JSON-LD) for Blog -->
     <script type="application/ld+json">
@@ -113,12 +113,12 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
         "@type": "Blog",
         "name": "Veronika Flores Blog",
         "description": "Thoughts and insights from Veronika Flores on UX/UI design, development, DevOps, and the intersection of technology and creativity.",
-        "url": "https://veronika.dev/blog",
+        "url": "https://veronikadev.netlify.app/blog",
         "author": {
           "@type": "Person",
           "name": "Veronika Flores",
-          "url": "https://veronika.dev",
-          "image": "https://veronika.dev/png/me_posing_front_google_office_with_golang_shirt.png",
+          "url": "https://veronikadev.netlify.app/",
+          "image": "https://veronikadev.netlify.app/png/me_posing_front_google_office_with_golang_shirt.png",
           "jobTitle": "UX/UI Engineer & DevOps Specialist",
           "worksFor": {
             "@type": "Organization",
@@ -130,14 +130,14 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
           "name": "Veronika Flores",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://veronika.dev/favicon.svg"
+            "url": "https://veronikadev.netlify.app/favicon.svg"
           }
         },
         "blogPost": [
           {
             "@type": "BlogPosting",
             "headline": "The Art of Minimal UX Design",
-            "url": "https://veronika.dev/blog/the-art-of-minimal-ux-design",
+            "url": "https://veronikadev.netlify.app/blog/the-art-of-minimal-ux-design",
             "datePublished": "2024-12-15",
             "author": {
               "@type": "Person",
@@ -147,7 +147,7 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
           {
             "@type": "BlogPosting",
             "headline": "Building Scalable Angular Applications",
-            "url": "https://veronika.dev/blog/building-scalable-angular-applications",
+            "url": "https://veronikadev.netlify.app/blog/building-scalable-angular-applications",
             "datePublished": "2024-12-10",
             "author": {
               "@type": "Person",
@@ -157,7 +157,7 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
           {
             "@type": "BlogPosting",
             "headline": "My Journey from Mexico to Google",
-            "url": "https://veronika.dev/blog/my-journey-from-mexico-to-google",
+            "url": "https://veronikadev.netlify.app/blog/my-journey-from-mexico-to-google",
             "datePublished": "2024-12-05",
             "author": {
               "@type": "Person",
@@ -176,16 +176,17 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
       rel="stylesheet"
     />
 
-    <title>Blog • Veronika Flores</title>
-
-    <style>
+    <title>Blog • Veronika Flores</title>    <style>
       :root {
+        /* Light mode colors */
         --color-primary: #000000;
         --color-secondary: #404040;
         --color-tertiary: #808080;
         --color-accent: #f5f5f5;
         --color-background: #ffffff;
         --color-surface: #fafafa;
+        --color-nav-bg: rgba(255, 255, 255, 0.95);
+        --color-nav-bg-scroll: rgba(255, 255, 255, 0.98);
         --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
         --font-mono: "JetBrains Mono", "Courier New", monospace;
         --spacing-xs: 0.5rem;
@@ -197,10 +198,21 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
         --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      * {
+      /* Dark mode colors */
+      [data-theme="dark"] {
+        --color-primary: #ffffff;
+        --color-secondary: #e4e4e7;
+        --color-tertiary: #a1a1aa;
+        --color-accent: #18181b;
+        --color-background: #0a0a0a;
+        --color-surface: #141414;
+        --color-nav-bg: rgba(10, 10, 10, 0.95);
+        --color-nav-bg-scroll: rgba(10, 10, 10, 0.98);
+      }      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
       }
 
       html {
@@ -221,19 +233,18 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
         body {
           text-rendering: optimizeSpeed;
         }
-      }
-
-      /* Navigation */
+      }      /* Navigation */
       .nav {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         padding: var(--spacing-sm) var(--spacing-md);
-        background: rgba(255, 255, 255, 0.95);
+        background: var(--color-nav-bg);
         backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        border-bottom: 1px solid rgba(128, 128, 128, 0.1);
         z-index: 1000;
+        transition: var(--transition);
       }
 
       .nav-container {
@@ -250,12 +261,11 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
         font-size: 1.125rem;
         color: var(--color-primary);
         text-decoration: none;
-      }
-
-      .nav-links {
+      }      .nav-links {
         display: flex;
         gap: var(--spacing-md);
         list-style: none;
+        align-items: center;
       }
 
       .nav-link {
@@ -271,6 +281,35 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
       .nav-link:hover,
       .nav-link.active {
         color: var(--color-primary);
+      }
+
+      /* Dark mode toggle button */
+      .theme-toggle {
+        background: none;
+        border: none;
+        border-radius: var(--border-radius);
+        padding: var(--spacing-xs);
+        cursor: pointer;
+        color: var(--color-secondary);
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        transition: var(--transition);
+        margin-left: var(--spacing-sm);
+      }
+
+      .theme-toggle:hover {
+        color: var(--color-primary);
+        transform: scale(1.05);
+        background: rgba(128, 128, 128, 0.1);
+      }
+
+      .theme-toggle:focus {
+        outline: none;
+        background: rgba(128, 128, 128, 0.15);
       }
 
       /* Hero Section */
@@ -309,12 +348,10 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
         justify-content: center;
         flex-wrap: wrap;
         gap: var(--spacing-xs);
-      }
-
-      .filter-btn {
+      }      .filter-btn {
         padding: var(--spacing-xs) var(--spacing-sm);
         background: transparent;
-        border: 1px solid rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(128, 128, 128, 0.2);
         border-radius: var(--border-radius);
         color: var(--color-secondary);
         font-family: var(--font-mono);
@@ -326,7 +363,7 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
       .filter-btn:hover,
       .filter-btn.active {
         background: var(--color-primary);
-        color: white;
+        color: var(--color-background);
         border-color: var(--color-primary);
       }
 
@@ -415,16 +452,15 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
       .coming-soon p {
         color: var(--color-secondary);
         line-height: 1.6;
-      }
-
-      /* Footer */
+      }      /* Footer */
       .footer {
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(128, 128, 128, 0.1);
         padding: var(--spacing-md);
         text-align: center;
         color: var(--color-tertiary);
         font-size: 0.875rem;
-      }      /* Ultra Responsive Design */
+        transition: var(--transition);
+      }/* Ultra Responsive Design */
       
       /* Large Desktop (1400px+) */
       @media (min-width: 1400px) {
@@ -841,14 +877,18 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
   </head>
   <body>
     <!-- Navigation -->
-    <nav class="nav">
-      <div class="nav-container">
+    <nav class="nav">      <div class="nav-container">
         <a href="/" class="nav-logo">veronika.dev</a>
         <ul class="nav-links">
           <li><a href="/" class="nav-link">Home</a></li>
           <li><a href="/blog" class="nav-link active">Blog</a></li>
           <li><a href="/#about" class="nav-link">About</a></li>
           <li><a href="/#contact" class="nav-link">Contact</a></li>
+          <li>
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+              <span class="theme-icon">☀️</span>
+            </button>
+          </li>
         </ul>
       </div>
     </nav>
@@ -964,9 +1004,7 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
             window.location.href = `/blog/${postSlugs[index]}`;
           }
         });
-      });
-
-      // Add fade-in animation
+      });      // Add fade-in animation
       const style = document.createElement("style");
       style.textContent = `
 				@keyframes fadeIn {
@@ -975,6 +1013,57 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
 				}
 			`;
       document.head.appendChild(style);
+
+      // Theme management
+      const themeToggle = document.querySelector('.theme-toggle');
+      const themeIcon = document.querySelector('.theme-icon');
+      const html = document.documentElement;
+
+      // Check for saved theme or default to light mode
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      html.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+
+      function updateThemeIcon(theme) {
+        if (themeIcon) {
+          themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+      }
+
+      function toggleTheme() {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+      }
+
+      if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+      }
+
+      // Navigation background on scroll
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector(".nav");
+        if (nav) {
+          if (window.scrollY > 100) {
+            (nav as HTMLElement).style.background = "var(--color-nav-bg-scroll)";
+          } else {
+            (nav as HTMLElement).style.background = "var(--color-nav-bg)";
+          }
+        }
+      });
+
+      // Keyboard accessibility for theme toggle
+      if (themeToggle) {
+        themeToggle.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleTheme();
+          }
+        });
+      }
     </script>
   </body>
 </html>

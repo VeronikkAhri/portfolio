@@ -1,5 +1,5 @@
 // Generate sitemap dynamically
-const siteUrl = "https://veronika.dev";
+const siteUrl = "https://veronikadev.netlify.app/";
 
 interface Page {
   url: string;

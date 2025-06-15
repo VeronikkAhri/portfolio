@@ -22,7 +22,7 @@ const currentYear = new Date().getFullYear();
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://veronika.dev/" />
+    <meta property="og:url" content="https://veronikadev.netlify.app/" />
     <meta
       property="og:title"
       content="Veronika Flores - UX/UI Engineer & DevOps Specialist at Google"
@@ -31,7 +31,7 @@ const currentYear = new Date().getFullYear();
       property="og:description"
       content="Professional portfolio of Veronika Flores, UX/UI Engineer & DevOps Specialist at Google California. 3+ years experience in Go, Angular, Figma, and user-centered design."
     />
-    <meta property="og:image" content="https://veronika.dev/png/me_posing_front_google_office_with_golang_shirt.png" />
+    <meta property="og:image" content="https://veronikadev.netlify.app/png/me_posing_front_google_office_with_golang_shirt.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Veronika Flores at Google Office" />
@@ -40,25 +40,25 @@ const currentYear = new Date().getFullYear();
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://veronika.dev/" />
+    <meta property="twitter:url" content="https://veronikadev.netlify.app/" />
     <meta property="twitter:title" content="Veronika Flores - UX/UI Engineer & DevOps Specialist at Google" />
     <meta property="twitter:description" content="Professional portfolio of Veronika Flores, UX/UI Engineer & DevOps Specialist at Google California. 3+ years experience in Go, Angular, Figma, and user-centered design." />
-    <meta property="twitter:image" content="https://veronika.dev/png/me_posing_front_google_office_with_golang_shirt.png" />
+    <meta property="twitter:image" content="https://veronikadev.netlify.app/png/me_posing_front_google_office_with_golang_shirt.png" />
     <meta property="twitter:image:alt" content="Veronika Flores at Google Office" />
 
     <!-- LinkedIn -->
     <meta property="article:author" content="Veronika Flores" />
     <meta property="article:publisher" content="https://www.linkedin.com/in/veronika-flores-8b469136b/" />    <!-- Canonical URL -->
-    <link rel="canonical" href="https://veronika.dev/" />
+    <link rel="canonical" href="https://veronikadev.netlify.app/" />
     
     <!-- Additional SEO -->
     <link rel="sitemap" href="/sitemap.xml" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow" />
-    
-    <!-- Performance & Security -->
+      <!-- Performance & Security -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
     <meta name="msapplication-TileColor" content="#000000" />
       <!-- Prefetch DNS for external resources -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -86,8 +86,8 @@ const currentYear = new Date().getFullYear();
           "addressCountry": "US"
         },
         "nationality": "Mexican",
-        "url": "https://veronika.dev",
-        "image": "https://veronika.dev/png/me_posing_front_google_office_with_golang_shirt.png",
+        "url": "https://veronikadev.netlify.app/",
+        "image": "https://veronikadev.netlify.app/png/me_posing_front_google_office_with_golang_shirt.png",
         "sameAs": [
           "https://github.com/VeronikkAhri",
           "https://www.linkedin.com/in/veronika-flores-8b469136b/",
@@ -129,10 +129,9 @@ const currentYear = new Date().getFullYear();
       rel="stylesheet"
     />
 
-    <title>Veronika Flores • UX/UI Engineer & DevOps</title>
-
-    <style>
+    <title>Veronika Flores • UX/UI Engineer & DevOps</title>    <style>
       :root {
+        /* Light mode colors */
         --color-primary: #000000;
         --color-secondary: #404040;
         --color-tertiary: #808080;
@@ -141,6 +140,8 @@ const currentYear = new Date().getFullYear();
         --color-surface: #fafafa;
         --color-hero-text: #ffffff;
         --color-hero-secondary: rgba(255, 255, 255, 0.9);
+        --color-nav-bg: rgba(255, 255, 255, 0.95);
+        --color-nav-bg-scroll: rgba(255, 255, 255, 0.98);
         --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
         --font-mono: "JetBrains Mono", "Courier New", monospace;
         --spacing-xs: 0.5rem;
@@ -152,10 +153,23 @@ const currentYear = new Date().getFullYear();
         --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      * {
+      /* Dark mode colors */
+      [data-theme="dark"] {
+        --color-primary: #ffffff;
+        --color-secondary: #e4e4e7;
+        --color-tertiary: #a1a1aa;
+        --color-accent: #18181b;
+        --color-background: #0a0a0a;
+        --color-surface: #141414;
+        --color-hero-text: #ffffff;
+        --color-hero-secondary: rgba(255, 255, 255, 0.9);
+        --color-nav-bg: rgba(10, 10, 10, 0.95);
+        --color-nav-bg-scroll: rgba(10, 10, 10, 0.98);
+      }      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
       }
 
       html {
@@ -211,9 +225,7 @@ const currentYear = new Date().getFullYear();
         .hero-video {
           object-position: 30% center;
         }
-      }
-
-      .hero-overlay {
+      }      .hero-overlay {
         position: absolute;
         top: 0;
         left: 0;
@@ -226,6 +238,17 @@ const currentYear = new Date().getFullYear();
           rgba(255, 255, 255, 0.85) 100%
         );
         z-index: -1;
+        transition: var(--transition);
+      }
+
+      /* Dark mode hero overlay */
+      [data-theme="dark"] .hero-overlay {
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.75) 0%,
+          rgba(0, 0, 0, 0.65) 50%,
+          rgba(0, 0, 0, 0.75) 100%
+        );
       }
 
       .hero-content {
@@ -245,9 +268,7 @@ const currentYear = new Date().getFullYear();
           opacity: 1;
           transform: translateY(0);
         }
-      }
-
-      .hero-title {
+      }      .hero-title {
         font-family: var(--font-primary);
         font-size: clamp(4rem, 8.5vw, 6.5rem);
         font-weight: 600;
@@ -256,6 +277,7 @@ const currentYear = new Date().getFullYear();
         line-height: 0.9;
         color: var(--color-primary);
         text-shadow: 0 3px 6px rgba(255, 255, 255, 0.9), 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
       }
 
       .hero-subtitle {
@@ -267,6 +289,7 @@ const currentYear = new Date().getFullYear();
         letter-spacing: 0.05em;
         text-transform: uppercase;
         text-shadow: 0 2px 4px rgba(255, 255, 255, 0.95), 0 1px 2px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
       }
 
       .hero-description {
@@ -278,6 +301,20 @@ const currentYear = new Date().getFullYear();
         line-height: 1.6;
         font-weight: 400;
         text-shadow: 0 2px 4px rgba(255, 255, 255, 0.95), 0 1px 2px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+      }
+
+      /* Dark mode hero text shadows */
+      [data-theme="dark"] .hero-title {
+        text-shadow: 0 3px 6px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(255, 255, 255, 0.1);
+      }
+
+      [data-theme="dark"] .hero-subtitle {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.95), 0 1px 2px rgba(255, 255, 255, 0.1);
+      }
+
+      [data-theme="dark"] .hero-description {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.95), 0 1px 2px rgba(255, 255, 255, 0.1);
       }
 
       .hero-cta {
@@ -301,18 +338,16 @@ const currentYear = new Date().getFullYear();
         background: var(--color-background);
         color: var(--color-primary);
         transform: translateY(-1px);
-      }
-
-      /* Navigation */
+      }      /* Navigation */
       .nav {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         padding: var(--spacing-sm) var(--spacing-md);
-        background: rgba(255, 255, 255, 0.95);
+        background: var(--color-nav-bg);
         backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        border-bottom: 1px solid rgba(128, 128, 128, 0.1);
         z-index: 1000;
         transition: var(--transition);
       }
@@ -337,6 +372,7 @@ const currentYear = new Date().getFullYear();
         display: flex;
         gap: var(--spacing-md);
         list-style: none;
+        align-items: center;
       }
 
       .nav-link {
@@ -351,6 +387,33 @@ const currentYear = new Date().getFullYear();
 
       .nav-link:hover {
         color: var(--color-primary);
+      }      /* Dark mode toggle button */
+      .theme-toggle {
+        background: none;
+        border: none;
+        border-radius: var(--border-radius);
+        padding: var(--spacing-xs);
+        cursor: pointer;
+        color: var(--color-secondary);
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        transition: var(--transition);
+        margin-left: var(--spacing-sm);
+      }
+
+      .theme-toggle:hover {
+        color: var(--color-primary);
+        transform: scale(1.05);
+        background: rgba(128, 128, 128, 0.1);
+      }
+
+      .theme-toggle:focus {
+        outline: none;
+        background: rgba(128, 128, 128, 0.15);
       }
 
       /* Sections */
@@ -448,18 +511,27 @@ const currentYear = new Date().getFullYear();
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: var(--spacing-md);
-      }
-
-      .skill-category {
+      }      .skill-category {
         padding: var(--spacing-md);
         background: var(--color-surface);
         border-radius: var(--border-radius);
         transition: var(--transition);
+        border: 1px solid transparent;
       }
 
       .skill-category:hover {
         transform: translateY(-2px);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Dark mode skill category */
+      [data-theme="dark"] .skill-category {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      [data-theme="dark"] .skill-category:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.2);
       }
 
       .skill-category h3 {
@@ -473,16 +545,20 @@ const currentYear = new Date().getFullYear();
         display: flex;
         flex-wrap: wrap;
         gap: var(--spacing-xs);
-      }
-
-      .skill-tag {
+      }      .skill-tag {
         padding: 0.25rem 0.75rem;
         background: var(--color-background);
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(128, 128, 128, 0.2);
         border-radius: var(--border-radius);
         font-size: 0.875rem;
         color: var(--color-secondary);
         font-family: var(--font-mono);
+        transition: var(--transition);
+      }
+
+      /* Dark mode skill tags */
+      [data-theme="dark"] .skill-tag {
+        border: 1px solid rgba(255, 255, 255, 0.2);
       }
 
       /* Contact Section */
@@ -562,13 +638,16 @@ const currentYear = new Date().getFullYear();
 
       .contact-links a:hover {
         color: var(--color-primary);
-      }
-
-      .availability {
+      }      .availability {
         background: var(--color-surface);
         padding: var(--spacing-md);
         border-radius: var(--border-radius);
         text-align: center;
+        border: 1px solid transparent;
+        transition: var(--transition);
+      }      /* Dark mode availability */
+      [data-theme="dark"] .availability {
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
 
       .availability-status {
@@ -600,12 +679,13 @@ const currentYear = new Date().getFullYear();
 
       /* Footer */
       .footer {
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(128, 128, 128, 0.2);
         padding: var(--spacing-md);
         text-align: center;
         color: var(--color-tertiary);
         font-size: 0.875rem;
-      }      /* Ultra Responsive Design */
+        transition: var(--transition);
+      }/* Ultra Responsive Design */
       
       /* Large Desktop (1400px+) */
       @media (min-width: 1400px) {
@@ -741,9 +821,7 @@ const currentYear = new Date().getFullYear();
           grid-template-columns: 1fr;
           gap: var(--spacing-md);
         }
-      }
-
-      /* Mobile Landscape & Large Mobile (480px - 767px) */
+      }      /* Mobile Landscape & Large Mobile (480px - 767px) */
       @media (max-width: 767px) and (min-width: 480px) {
         .nav {
           padding: var(--spacing-xs) var(--spacing-sm);
@@ -766,6 +844,13 @@ const currentYear = new Date().getFullYear();
         .nav-link {
           font-size: 0.75rem;
           padding: var(--spacing-xs);
+        }
+
+        .theme-toggle {
+          width: 32px;
+          height: 32px;
+          font-size: 0.9rem;
+          margin-left: var(--spacing-xs);
         }
 
         .hero {
@@ -851,9 +936,7 @@ const currentYear = new Date().getFullYear();
         .contact-links a {
           font-size: 0.8rem;
         }
-      }
-
-      /* Small Mobile (320px - 479px) */
+      }      /* Small Mobile (320px - 479px) */
       @media (max-width: 479px) {
         .nav {
           padding: var(--spacing-xs);
@@ -879,6 +962,14 @@ const currentYear = new Date().getFullYear();
         .nav-link {
           font-size: 0.7rem;
           padding: 0.25rem 0.5rem;
+        }
+
+        .theme-toggle {
+          width: 28px;
+          height: 28px;
+          font-size: 0.8rem;
+          margin-left: 0;
+          margin-top: var(--spacing-xs);
         }
 
         .hero {
@@ -1097,8 +1188,7 @@ const currentYear = new Date().getFullYear();
       }
     </style>
   </head>
-  <body>
-    <!-- Navigation -->
+  <body>    <!-- Navigation -->
     <nav class="nav">
       <div class="nav-container">
         <a href="/" class="nav-logo">veronika.dev</a>
@@ -1107,9 +1197,18 @@ const currentYear = new Date().getFullYear();
           <li><a href="#skills" class="nav-link">Skills</a></li>
           <li><a href="/blog" class="nav-link">Blog</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
+          <li>
+            <button 
+              class="theme-toggle" 
+              aria-label="Toggle dark mode"
+              title="Toggle dark mode"
+            >
+              <span class="theme-icon">🌙</span>
+            </button>
+          </li>
         </ul>
       </div>
-    </nav>    <!-- Hero Section -->
+    </nav><!-- Hero Section -->
     <section class="hero">
       <video 
         class="hero-video" 
@@ -1301,9 +1400,36 @@ const currentYear = new Date().getFullYear();
       <p>
         &copy; {currentYear} Veronika Flores. Crafted with passion using Astro.
       </p>
-    </footer>
+    </footer>    <script>
+      // Theme management
+      const themeToggle = document.querySelector('.theme-toggle');
+      const themeIcon = document.querySelector('.theme-icon');
+      const html = document.documentElement;
 
-    <script>
+      // Check for saved theme or default to light mode
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      html.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+
+      function updateThemeIcon(theme) {
+        if (themeIcon) {
+          themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+      }
+
+      function toggleTheme() {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+      }
+
+      if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+      }
+
       // Ensure video plays
       document.addEventListener("DOMContentLoaded", function () {
         const video = document.querySelector(".hero-video") as HTMLVideoElement;
@@ -1337,13 +1463,28 @@ const currentYear = new Date().getFullYear();
       window.addEventListener("scroll", () => {
         const nav = document.querySelector(".nav");
         if (nav) {
+          const currentTheme = html.getAttribute('data-theme');
           if (window.scrollY > 100) {
-            (nav as HTMLElement).style.background = "rgba(255, 255, 255, 0.98)";
+            (nav as HTMLElement).style.background = currentTheme === 'dark' 
+              ? "rgba(10, 10, 10, 0.98)" 
+              : "rgba(255, 255, 255, 0.98)";
           } else {
-            (nav as HTMLElement).style.background = "rgba(255, 255, 255, 0.95)";
+            (nav as HTMLElement).style.background = currentTheme === 'dark' 
+              ? "rgba(10, 10, 10, 0.95)" 
+              : "rgba(255, 255, 255, 0.95)";
           }
         }
       });
+
+      // Keyboard accessibility for theme toggle
+      if (themeToggle) {
+        themeToggle.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleTheme();
+          }
+        });
+      }
     </script>
   </body>
 </html>
