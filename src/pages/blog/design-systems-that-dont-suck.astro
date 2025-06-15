@@ -1,0 +1,208 @@
+---
+import BlogLayout from "../../layouts/BlogLayout.astro";
+
+const post = {
+  title: "Design Systems That Don't Suck",
+  date: "2024-12-16",
+  readTime: "7 min read",
+  category: "Design Systems",
+  excerpt:
+    "Building design systems that teams actually want to use, not fight against. Lessons from Google's design system work.",
+  slug: "design-systems-that-dont-suck"
+};
+---
+
+<BlogLayout post={post}>
+  <h2>Why Most Design Systems Fail</h2>
+  <p>
+    I've seen beautiful design systems that nobody uses and ugly ones that 
+    everyone loves. The difference isn't aesthetics – it's understanding that 
+    design systems are products, and your developers are your users.
+  </p>
+
+  <p>
+    If your design system feels like homework, you've already lost.
+  </p>
+
+  <h2>Start with Problems, Not Components</h2>
+  <p>
+    Don't begin by cataloging every button variant in your app. Start by 
+    identifying the actual pain points your team faces:
+  </p>
+
+  <ul>
+    <li>Are developers recreating the same components over and over?</li>
+    <li>Do similar features look different across your product?</li>
+    <li>How long does it take to implement a "simple" design?</li>
+    <li>Are designers and developers speaking the same language?</li>
+  </ul>
+
+  <h2>The 80/20 Rule for Design Systems</h2>
+  <p>
+    Focus on the components that appear everywhere: buttons, inputs, cards, 
+    modals. Get these right and you'll solve 80% of your consistency problems.
+  </p>
+
+  <h3>My Priority Order:</h3>
+  <ol>
+    <li><strong>Typography scale</strong> (everything else builds on this)</li>
+    <li><strong>Color tokens</strong> (semantic, not just hex values)</li>
+    <li><strong>Spacing system</strong> (consistent rhythm across the UI)</li>
+    <li><strong>Basic components</strong> (button, input, card)</li>
+    <li><strong>Layout patterns</strong> (how things are arranged)</li>
+  </ol>
+
+  <h2>Figma + Code = Best Friends</h2>
+  <p>
+    Your Figma components should map directly to your code components. Same 
+    names, same variants, same behavior. This isn't optional – it's the bridge 
+    between design and development.
+  </p>
+
+  <pre><code>// Button component in React
+export const Button = ({ 
+  variant = 'primary', 
+  size = 'medium', 
+  children,
+  ...props 
+}) => {
+  return (
+    &lt;button 
+      className={`btn btn--${variant} btn--${size}`}
+      {...props}
+    &gt;
+      {children}
+    &lt;/button&gt;
+  );
+};</code></pre>
+
+  <h3>Figma Variant Names Should Match:</h3>
+  <ul>
+    <li>Property: "Variant" → Values: "primary", "secondary", "ghost"</li>
+    <li>Property: "Size" → Values: "small", "medium", "large"</li>
+    <li>Property: "State" → Values: "default", "hover", "disabled"</li>
+  </ul>
+
+  <h2>Documentation That Developers Actually Read</h2>
+  <p>
+    Nobody reads 50-page design system documentation. Make it scannable, 
+    practical, and example-heavy.
+  </p>
+
+  <h3>What to Include:</h3>
+  <ul>
+    <li><strong>Live examples</strong> (copy-paste ready code)</li>
+    <li><strong>Do's and don'ts</strong> (visual examples of good/bad usage)</li>
+    <li><strong>Props table</strong> (what each component accepts)</li>
+    <li><strong>Accessibility notes</strong> (screen reader support, keyboard navigation)</li>
+  </ul>
+
+  <blockquote>
+    "If your design system documentation is longer than your getting started guide, 
+    you've overcomplicated something."
+  </blockquote>
+
+  <h2>Tokens: The Secret Sauce</h2>
+  <p>
+    Design tokens are the DNA of your design system. They make changes easy 
+    and ensure consistency across platforms.
+  </p>
+
+  <pre><code>// Instead of this:
+color: #3B82F6;
+
+// Use this:
+color: var(--color-primary-500);
+
+// Or in JavaScript:
+backgroundColor: tokens.color.primary[500];</code></pre>
+
+  <h3>Token Categories I Actually Use:</h3>
+  <ul>
+    <li><strong>Core tokens:</strong> Raw values (colors, fonts, sizes)</li>
+    <li><strong>Semantic tokens:</strong> Meaningful names (primary, danger, success)</li>
+    <li><strong>Component tokens:</strong> Specific to components (button-padding, card-shadow)</li>
+  </ul>
+
+  <h2>Making Changes Without Breaking Things</h2>
+  <p>
+    A good design system evolves without breaking existing implementations. 
+    Version your components and provide migration paths.
+  </p>
+
+  <h3>Change Strategy:</h3>
+  <ol>
+    <li><strong>Add new variant</strong> alongside old one</li>
+    <li><strong>Update documentation</strong> to prefer new variant</li>
+    <li><strong>Deprecate old variant</strong> with clear timeline</li>
+    <li><strong>Remove old variant</strong> after migration period</li>
+  </ol>
+
+  <h2>Testing Your Design System</h2>
+  <p>
+    Yes, design systems need testing. Not just visual regression tests (though 
+    those help), but usability testing with your actual users: the development team.
+  </p>
+
+  <h3>Questions to Ask Developers:</h3>
+  <ul>
+    <li>How long did it take to implement this design?</li>
+    <li>What was confusing about the component API?</li>
+    <li>What did you have to customize or work around?</li>
+    <li>Would you use this component again?</li>
+  </ul>
+
+  <h2>The Governance Reality</h2>
+  <p>
+    Someone needs to own the design system, but it shouldn't be a dictatorship. 
+    Create a lightweight process for proposing changes and adding new components.
+  </p>
+
+  <h3>Simple Governance Model:</h3>
+  <ul>
+    <li><strong>RFC process</strong> for major changes</li>
+    <li><strong>Regular office hours</strong> for questions and feedback</li>
+    <li><strong>Quarterly reviews</strong> of usage and pain points</li>
+    <li><strong>Clear contribution guidelines</strong> for new components</li>
+  </ul>
+
+  <h2>Metrics That Actually Matter</h2>
+  <p>
+    Don't measure design system success by the number of components. Measure 
+    it by developer happiness and product consistency.
+  </p>
+
+  <h3>Good Metrics:</h3>
+  <ul>
+    <li>Time to implement new features</li>
+    <li>Design system component adoption rate</li>
+    <li>Number of one-off components created</li>
+    <li>Developer satisfaction surveys</li>
+  </ul>
+
+  <h2>Tools I Actually Recommend</h2>
+  <ul>
+    <li><strong>Figma:</strong> For design components and tokens</li>
+    <li><strong>Storybook:</strong> For component documentation and testing</li>
+    <li><strong>Style Dictionary:</strong> For token transformation</li>
+    <li><strong>Chromatic:</strong> For visual regression testing</li>
+    <li><strong>GitHub:</strong> For version control and contribution workflow</li>
+  </ul>
+
+  <h2>The Kawaii Philosophy</h2>
+  <p>
+    A good design system should spark joy in your development team. If using 
+    your components feels delightful rather than restrictive, you're doing it right.
+  </p>
+
+  <p>
+    Remember: you're not building a museum of perfect components. You're building 
+    a toolkit that helps real people ship real products faster and more consistently.
+  </p>
+
+  <p>
+    The best design system is the one that gets out of your team's way while 
+    quietly ensuring everything looks and feels cohesive. It's the ultimate 
+    behind-the-scenes hero.
+  </p>
+</BlogLayout>

@@ -1,0 +1,190 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+const title = "User Research in the Age of Microservices";
+const description = "How I apply UX research methods to understand developer needs and design better internal tools at Google.";
+const publishDate = "2024-12-16";
+const category = "UX Design";
+const readTime = "6 min read";
+---
+
+<BlogLayout 
+  title={title}
+  description={description}
+  publishDate={publishDate}
+  category={category}
+  readTime={readTime}
+>
+
+**Plot twist:** Your internal tools need user research too.
+
+At Google, I spend half my time designing external user experiences and half designing for our internal developer community. Guess what? **Developers are users too**, and they deserve the same research-informed design approach.
+
+## The Epiphany Moment 💡
+
+Picture this: I'm sitting in a conference room watching a senior engineer struggle with our deployment dashboard for 10 minutes. Same engineer who could optimize database queries in their sleep was **completely lost** in our "intuitive" interface.
+
+That's when it hit me: **We research external users religiously but assume we know our internal users by osmosis.**
+
+Big mistake.
+
+## Internal Users Are Still Users
+
+### The Mindset Shift
+
+- **External UX:** "Let's interview 20 customers"
+- **Internal UX:** "Just ask Jim, he's been here forever"
+
+❌ **Wrong approach!**
+
+✅ **Better approach:** Apply the same rigor to internal tools.
+
+## Research Methods for Internal Tools
+
+### 1. Shadow Sessions 👤
+
+Instead of user interviews, I do **"dev shadowing"**:
+
+- Watch engineers during actual work
+- Note friction points they don't even mention
+- Observe workarounds they've created
+- Time common tasks (spoiler: everything takes longer than expected)
+
+**Real insight:** Engineers will suffer through bad UX rather than complain. They'll just build workarounds and move on.
+
+### 2. The "Onboarding Test" 🆕
+
+New team members are **perfect user research participants**:
+
+- Fresh eyes on established processes
+- No learned blindness to existing problems
+- Honest feedback (they haven't been socialized yet)
+- Different mental models than longtime users
+
+I literally schedule **"onboarding research sessions"** with new hires in their first week.
+
+### 3. Support Ticket Archaeology 🔍
+
+Dig through:
+- **Slack #help channels**
+- **Internal support tickets**
+- **Documentation page analytics**
+- **Failed deployment logs**
+
+Each support request is a **cry for help** - and a design opportunity.
+
+## Real Research in Action
+
+### Case Study: The Kubernetes Dashboard Nobody Used
+
+**Problem:** Shiny new K8s dashboard with 15% adoption after 6 months.
+
+**Traditional approach:** "People just need training."
+
+**UX research approach:** Interviews with 12 engineers across different teams.
+
+### Key Findings:
+
+1. **"It's beautiful but I can't find anything"** (IA problem)
+2. **"kubectl is faster for what I actually need"** (workflow mismatch)
+3. **"I don't trust the data freshness"** (reliability concern)
+4. **"My manager loves demos but I need debug tools"** (audience mismatch)
+
+### The Fix:
+
+- **Simplified navigation** based on actual user journeys
+- **CLI integration** (embrace, don't replace)
+- **Real-time data indicators** (trust building)
+- **Mode switching** (demo view vs. debug view)
+
+**Result:** 78% adoption in 3 months.
+
+## Research-Informed Design Patterns
+
+### Pattern 1: Progressive Disclosure for Developers
+
+```
+Level 1: "Is everything okay?" (Health check)
+Level 2: "What's wrong?" (Error overview)
+Level 3: "Where exactly?" (Detailed logs)
+Level 4: "How do I fix it?" (Runbooks & context)
+```
+
+### Pattern 2: The "Escape Hatch" Principle
+
+Always provide a way to **drop down to the next level**:
+- GUI to CLI commands
+- Simplified view to raw data
+- Automation to manual override
+
+**Developers need control.** Don't take it away.
+
+## Kawaii Research Methods ✨
+
+Yes, I make internal user research fun:
+
+### Emoji-Driven Feedback
+- 😍 Love it
+- 😐 It's fine
+- 😤 Makes me angry
+- 🤔 Confused
+- 🚀 This changed my life
+
+### "Coffee Chat Research"
+Casual 15-minute conversations over coffee (or matcha!) about daily workflows. Less formal = more honest feedback.
+
+### Async Research via Slack
+- **Quick polls** in team channels
+- **Reaction-based feedback** on prototypes
+- **Story threads** about pain points
+
+## The Mexico to Google Journey Applied 🌎
+
+My perspective as someone who **learned English as a second language** helps me design for diverse internal users:
+
+- **Clear, simple language** in interfaces
+- **Visual cues** over text-heavy explanations
+- **Multiple ways** to complete the same task
+- **Context-aware help** (what you need, when you need it)
+
+## Metrics That Actually Matter
+
+### Traditional Internal Tool Metrics:
+- Usage count
+- Feature adoption
+- Time to complete
+
+### UX-Informed Internal Tool Metrics:
+- **Support ticket reduction**
+- **Time from intent to action**
+- **User confidence scores**
+- **Onboarding success rate**
+- **"Would you recommend this to a colleague?"**
+
+## The ROI of Internal UX Research
+
+**Hard truth:** Bad internal tools cost more than bad external ones.
+
+- Lost productivity compounds daily
+- Engineer frustration affects retention
+- Poor tools slow down entire product delivery
+- Technical debt accumulates faster
+
+**Good internal UX pays for itself** in developer happiness and velocity.
+
+## My Research Toolkit 🛠️
+
+- **Figma** for collaborative design sessions
+- **Miro** for journey mapping with engineering teams
+- **Notion** for research documentation
+- **Slack** for async feedback loops
+- **Grafana** for behavioral analytics
+- **Good old conversations** over coffee
+
+---
+
+**The future of internal tooling is user-centered.** Every CI/CD pipeline, monitoring dashboard, and deployment script should be designed with the same care we give external products.
+
+*What internal tools in your organization could use some UX love? I'm always curious about the creative solutions teams build! 🌟*
+
+</BlogLayout>

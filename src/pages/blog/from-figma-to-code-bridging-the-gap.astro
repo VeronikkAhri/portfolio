@@ -1,0 +1,209 @@
+---
+import BlogLayout from "../../layouts/BlogLayout.astro";
+
+const post = {
+  title: "From Figma to Code: Bridging the Gap",
+  date: "2024-12-14",
+  readTime: "5 min read",
+  category: "UX Design",
+  excerpt:
+    "How to create designs that developers love to implement and users love to use. Practical tips from someone who lives in both worlds.",
+  slug: "from-figma-to-code-bridging-the-gap"
+};
+---
+
+<BlogLayout post={post}>
+  <h2>Why Designers and Developers Fight</h2>
+  <p>
+    I've been on both sides of this conversation. As a UX designer, I'd create 
+    pixel-perfect mockups that seemed impossible to build. As a developer, I'd 
+    receive designs that looked beautiful but ignored technical constraints.
+  </p>
+
+  <p>
+    The gap isn't technical – it's about understanding each other's superpowers 
+    and limitations.
+  </p>
+
+  <h2>Design with Development in Mind</h2>
+  <p>
+    The best designs feel effortless to build because they work with technology, 
+    not against it. This doesn't mean compromising on user experience – it means 
+    being smart about how you achieve it.
+  </p>
+
+  <h3>Constraints That Actually Help:</h3>
+  <ul>
+    <li><strong>8px grid system:</strong> Makes spacing consistent and developer-friendly</li>
+    <li><strong>Component thinking:</strong> Design reusable pieces, not unique snowflakes</li>
+    <li><strong>Real content:</strong> Design with actual text lengths and data volumes</li>
+    <li><strong>Device constraints:</strong> Test on real phones, not just desktop</li>
+  </ul>
+
+  <h2>Figma Organization That Developers Love</h2>
+  <p>
+    A messy Figma file creates messy code. Organize your designs like you'd 
+    organize code: clear hierarchy, consistent naming, and logical grouping.
+  </p>
+
+  <h3>File Structure That Works:</h3>
+  <pre><code>📁 Design System
+├── 🎨 Foundations (colors, typography, spacing)
+├── 🧩 Components (buttons, inputs, cards)
+├── 📱 Patterns (forms, navigation, layouts)
+└── 📄 Pages (actual product screens)
+
+📁 Product Features
+├── 🔐 Authentication Flow
+├── 👤 User Dashboard
+└── ⚙️ Settings Pages</code></pre>
+
+  <h2>Auto Layout = CSS Flexbox</h2>
+  <p>
+    Figma's Auto Layout works almost exactly like CSS Flexbox. Use it everywhere. 
+    Your developers will thank you because your designs will translate directly 
+    to responsive code.
+  </p>
+
+  <h3>Auto Layout Best Practices:</h3>
+  <ul>
+    <li>Set proper padding and gaps (use your 8px grid)</li>
+    <li>Choose appropriate resize behaviors</li>
+    <li>Use constraints for responsive behavior</li>
+    <li>Name your auto layout frames descriptively</li>
+  </ul>
+
+  <blockquote>
+    "If your Figma design doesn't use Auto Layout, your developer will have to 
+    guess how it should behave when content changes. Guessing leads to bugs."
+  </blockquote>
+
+  <h2>Component Variants = Component Props</h2>
+  <p>
+    When you create component variants in Figma, think about how they'll become 
+    props in code. Each variant property should map to a meaningful parameter.
+  </p>
+
+  <pre><code>// Figma Component: Button
+// Property: "State" → Values: "Default", "Hover", "Disabled"
+// Property: "Size" → Values: "Small", "Medium", "Large"
+// Property: "Type" → Values: "Primary", "Secondary", "Ghost"
+
+// Code Component:
+&lt;Button 
+  state="default" 
+  size="medium" 
+  type="primary"
+&gt;
+  Click me
+&lt;/Button&gt;</code></pre>
+
+  <h2>Handoff That Actually Helps</h2>
+  <p>
+    Don't just throw designs over the wall. Create handoffs that answer the 
+    questions developers will have before they ask them.
+  </p>
+
+  <h3>What to Include in Handoffs:</h3>
+  <ul>
+    <li><strong>Interactive states:</strong> hover, focus, active, disabled</li>
+    <li><strong>Edge cases:</strong> long text, empty states, error states</li>
+    <li><strong>Responsive behavior:</strong> how it looks on different screen sizes</li>
+    <li><strong>Animation intentions:</strong> what should move and how</li>
+    <li><strong>Accessibility notes:</strong> focus order, screen reader labels</li>
+  </ul>
+
+  <h2>Collaboration Techniques That Work</h2>
+
+  <h3>Live Design Reviews</h3>
+  <p>
+    Share your screen while designing. Let developers see your thought process 
+    and ask questions in real-time. Most "impossible" requests become simple 
+    when developers understand the user need behind them.
+  </p>
+
+  <h3>Prototype Early and Often</h3>
+  <p>
+    Build low-fidelity prototypes in code, not just Figma. Sometimes the best 
+    way to understand if an interaction works is to feel it in a real browser.
+  </p>
+
+  <h3>Pair Design Sessions</h3>
+  <p>
+    Sit with a developer and design together. They'll catch impossible layouts 
+    early, and you'll learn what's easy vs. hard to implement.
+  </p>
+
+  <h2>Technical Concepts Designers Should Know</h2>
+  <p>
+    You don't need to code, but understanding these concepts will make you a 
+    better designer:
+  </p>
+
+  <ul>
+    <li><strong>CSS Box Model:</strong> margin, border, padding, content</li>
+    <li><strong>Flexbox basics:</strong> justify-content, align-items, flex-direction</li>
+    <li><strong>Responsive units:</strong> px vs. rem vs. em vs. %</li>
+    <li><strong>Browser limitations:</strong> what causes performance issues</li>
+    <li><strong>Accessibility standards:</strong> WCAG guidelines and color contrast</li>
+  </ul>
+
+  <h2>Developer-Friendly Design Decisions</h2>
+
+  <h3>Choose Implementation-Friendly Patterns:</h3>
+  <ul>
+    <li>Consistent spacing (multiples of 8px)</li>
+    <li>Limited font sizes (6-8 max)</li>
+    <li>Semantic color naming (primary/secondary, not blue/green)</li>
+    <li>Standard component states</li>
+    <li>Progressive enhancement mindset</li>
+  </ul>
+
+  <h2>When to Push Back (Nicely)</h2>
+  <p>
+    Sometimes developers will ask you to compromise user experience for technical 
+    convenience. When to hold your ground vs. when to find creative alternatives:
+  </p>
+
+  <h3>Hold Your Ground When:</h3>
+  <ul>
+    <li>User research strongly supports the design</li>
+    <li>Accessibility would be compromised</li>
+    <li>The change would confuse users</li>
+  </ul>
+
+  <h3>Find Alternatives When:</h3>
+  <ul>
+    <li>Implementation timeline is critical</li>
+    <li>Technical complexity would create bugs</li>
+    <li>There's a simpler solution that achieves the same goal</li>
+  </ul>
+
+  <h2>Tools for Better Collaboration</h2>
+  <ul>
+    <li><strong>Figma Dev Mode:</strong> Provides better specs and code snippets</li>
+    <li><strong>Storybook:</strong> See your components in all their states</li>
+    <li><strong>Browser dev tools:</strong> Inspect and tweak designs in real code</li>
+    <li><strong>Loom:</strong> Record videos explaining complex interactions</li>
+  </ul>
+
+  <h2>The Magic Happens in the Middle</h2>
+  <p>
+    The best digital products happen when designers understand technology and 
+    developers understand users. You don't need to become an expert in the 
+    other field, but curiosity about how the other side works will make you 
+    infinitely more effective.
+  </p>
+
+  <p>
+    At Google, our best features come from designer-developer pairs who genuinely 
+    enjoy working together. They speak each other's language and share a common 
+    goal: building something users will love.
+  </p>
+
+  <p>
+    Remember: we're all on the same team, trying to create something meaningful 
+    for real people. The best bridge between design and code is empathy and 
+    curiosity about each other's craft.
+  </p>
+</BlogLayout>

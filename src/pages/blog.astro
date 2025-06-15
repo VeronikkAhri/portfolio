@@ -5,57 +5,204 @@ const currentYear = new Date().getFullYear();
 const blogPosts = [
   {
     id: 1,
+    title: "Kubernetes for Kawaii: Making Container Orchestration Less Scary",
+    excerpt:
+      "How I approach Kubernetes with empathy, clarity, and just a touch of kawaii magic to make container orchestration approachable for everyone.",
+    date: "2024-12-22",
+    readTime: "8 min read",
+    category: "DevOps",
+    slug: "kubernetes-for-kawaii"
+  },
+  {
+    id: 2,
+    title: "A Love Letter to Go: From a UX Designer's Heart",
+    excerpt:
+      "Why Go became my programming language soulmate and how it changed how I think about both code and design.",
+    date: "2024-12-20",
+    readTime: "4 min read",
+    category: "Golang",
+    slug: "golang-love-letter-from-ux-designer"
+  },  {
+    id: 2,
+    title: "A Love Letter to Go: From a UX Designer's Heart",
+    excerpt:
+      "Why Go became my programming language soulmate and how it changed how I think about both code and design.",
+    date: "2024-12-20",
+    readTime: "4 min read",
+    category: "Golang",
+    slug: "golang-love-letter-from-ux-designer"
+  },
+  {
+    id: 3,
+    title: "UX Principles That Make Me a Better DevOps Engineer",
+    excerpt:
+      "How thinking like a UX designer revolutionized my approach to infrastructure, monitoring, and developer experience.",
+    date: "2024-12-18",
+    readTime: "5 min read",
+    category: "DevOps",
+    slug: "ux-principles-for-devops-engineers"
+  },
+  {
+    id: 4,
+    title: "User Research in the Age of Microservices",
+    excerpt:
+      "How I apply UX research methods to understand developer needs and design better internal tools at Google.",
+    date: "2024-12-16",
+    readTime: "6 min read",
+    category: "UX Design",
+    slug: "user-research-for-internal-tools"
+  },
+  {
+    id: 5,
+    title: "Building Go APIs That Don't Suck: A Designer's Guide",
+    excerpt:
+      "Lessons learned from designing and building Go APIs at Google that prioritize developer experience and human usability.",
+    date: "2024-12-14",
+    readTime: "7 min read",
+    category: "Golang",
+    slug: "golang-apis-that-dont-suck"
+  },
+  {
+    id: 6,
+    title: "The Psychology of Developer Tools: Why Pretty UIs Matter",
+    excerpt:
+      "Exploring how visual design and emotional connection impact developer productivity and tool adoption in enterprise environments.",
+    date: "2024-12-12",
+    readTime: "5 min read",
+    category: "UX Design",
+    slug: "psychology-of-beautiful-developer-tools"
+  },
+  {
+    id: 6,
+    title: "Golang Microservices at Scale",
+    excerpt:
+      "How Go's simplicity becomes a superpower when building distributed systems that actually work in production.",
+    date: "2024-12-10",
+    readTime: "6 min read",
+    category: "Development",
+    slug: "golang-microservices-at-scale"
+  },  {
+    id: 7,
+    title: "Kawaii Culture Meets Silicon Valley: My Professional Journey",
+    excerpt:
+      "How embracing my kawaii aesthetic and anime love became a superpower in Silicon Valley tech culture and Google's engineering teams.",
+    date: "2024-12-08",
+    readTime: "6 min read",
+    category: "Personal",
+    slug: "kawaii-culture-meets-silicon-valley"
+  },  {
+    id: 8,
+    title: "UX Research Without the Fancy Tools",
+    excerpt:
+      "Sometimes the best insights come from simple conversations and keen observation, not expensive research platforms.",
+    date: "2024-12-08",
+    readTime: "4 min read",
+    category: "UX Design",
+    slug: "ux-research-without-fancy-tools"
+  },
+  {
+    id: 9,
+    title: "DevOps for Humans: Making CI/CD Less Scary",
+    excerpt:
+      "CI/CD doesn't have to be intimidating. Here's how to build deployment pipelines that actually help your team ship with confidence.",
+    date: "2024-12-06",
+    readTime: "5 min read",
+    category: "DevOps",
+    slug: "devops-for-humans-making-cicd-less-scary"
+  },
+  {
+    id: 10,
+    title: "Design Systems That Don't Suck",
+    excerpt:
+      "Building design systems that teams actually want to use, not fight against. Lessons from Google's design system work.",
+    date: "2024-12-04",
+    readTime: "7 min read",
+    category: "Design Systems",
+    slug: "design-systems-that-dont-suck"
+  },
+  {
+    id: 11,
+    title: "From Figma to Code: Bridging the Gap",
+    excerpt:
+      "How to create designs that developers love to implement and users love to use. Practical tips from someone who lives in both worlds.",
+    date: "2024-12-02",
+    readTime: "5 min read",
+    category: "UX Design",
+    slug: "from-figma-to-code-bridging-the-gap"
+  },  {
+    id: 12,
+    title: "Learning Go: A UX Designer's Perspective",
+    excerpt:
+      "What happens when a UX designer falls in love with Go? Lessons learned from crossing the design-development divide.",
+    date: "2024-11-30",
+    readTime: "6 min read",
+    category: "Personal",
+    slug: "learning-go-ux-designer-perspective"
+  },
+  {
+    id: 7,
     title: "The Art of Minimal UX Design",
     excerpt:
       "Exploring how less can be more when creating user interfaces that truly connect with people.",
     date: "2024-12-15",
     readTime: "5 min read",
     category: "UX Design",
-  },
+    slug: "the-art-of-minimal-ux-design"  },
   {
-    id: 2,
+    id: 8,
     title: "Building Scalable Angular Applications",
     excerpt:
       "Best practices for creating Angular applications that grow with your team and user base.",
     date: "2024-12-10",
     readTime: "8 min read",
     category: "Development",
+    slug: "building-scalable-angular-applications"  },
+  {
+    id: 9,
+    title: "Monitoring That Doesn't Make You Cry",
+    excerpt:
+      "How to set up observability that actually helps your team sleep better at night. No complex dashboards required.",
+    date: "2024-12-08",
+    readTime: "4 min read",
+    category: "DevOps",
+    slug: "monitoring-that-doesnt-make-you-cry"
   },
   {
-    id: 3,
+    id: 10,
     title: "My Journey from Mexico to Google",
     excerpt:
       "The challenges, learnings, and experiences that shaped my path in tech.",
     date: "2024-12-05",
     readTime: "6 min read",
     category: "Personal",
-  },
+    slug: "my-journey-from-mexico-to-google"  },
   {
-    id: 4,
+    id: 11,
     title: "DevOps Culture in Modern Teams",
     excerpt:
       "How to foster collaboration between development and operations for better products.",
     date: "2024-11-28",
     readTime: "7 min read",
     category: "DevOps",
-  },
+    slug: "devops-culture-in-modern-teams"  },
   {
-    id: 5,
+    id: 11,
     title: "Design Systems with Figma",
     excerpt:
       "Creating consistent and scalable design systems that bridge design and development.",
     date: "2024-11-20",
     readTime: "10 min read",
     category: "Design Systems",
-  },
+    slug: "design-systems-with-figma"  },
   {
-    id: 6,
+    id: 12,
     title: "The Kawaii Aesthetic in Professional Work",
     excerpt:
       "How bringing personality and fun into professional design can improve user engagement.",
     date: "2024-11-15",
     readTime: "4 min read",
     category: "Design Philosophy",
+    slug: "the-kawaii-aesthetic-in-professional-work"
   },
 ];
 
@@ -375,14 +522,15 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
         gap: var(--spacing-lg);
-      }
-
-      .blog-post {
+      }      .blog-post {
         background: var(--color-surface);
         border-radius: var(--border-radius);
         padding: var(--spacing-md);
         transition: var(--transition);
         cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        display: block;
       }
 
       .blog-post:hover {
@@ -917,13 +1065,12 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
           ))
         }
       </div>
-    </section>
-
-    <!-- Blog Grid -->
+    </section>    <!-- Blog Grid -->
     <section class="blog-grid">
       {
         blogPosts.map((post) => (
-          <article
+          <a 
+            href={`/blog/${post.slug}`}
             class="blog-post"
             data-category={post.category.toLowerCase().replace(/\s+/g, "-")}
           >
@@ -940,7 +1087,7 @@ const categories = [...new Set(blogPosts.map((post) => post.category))];
               </span>
               <span class="post-read-time">{post.readTime}</span>
             </div>
-          </article>
+          </a>
         ))
       }
     </section>
