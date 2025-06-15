@@ -8,70 +8,71 @@ const post = {
   category: "Personal",
   excerpt:
     "What happens when a UX designer falls in love with Go? Lessons learned from crossing the design-development divide.",
-  slug: "learning-go-ux-designer-perspective"
+  slug: "learning-go-ux-designer-perspective",
 };
 ---
 
 <BlogLayout post={post}>
   <h2>From Figma to Functions</h2>
   <p>
-    Two years ago, I was purely a UX designer. I lived in Figma, spoke in user 
-    journeys, and thought "backend" was just where data lived. Then I joined 
+    Two years ago, I was purely a UX designer. I lived in Figma, spoke in user
+    journeys, and thought "backend" was just where data lived. Then I joined
     Google and everything changed.
   </p>
 
   <p>
-    My first week, I attended a Go code review meeting. I understood maybe 10% 
-    of what was discussed, but something clicked. The simplicity, the clarity, 
-    the way problems were broken down – it felt like good design thinking, but 
+    My first week, I attended a Go code review meeting. I understood maybe 10%
+    of what was discussed, but something clicked. The simplicity, the clarity,
+    the way problems were broken down – it felt like good design thinking, but
     in code.
   </p>
 
   <h2>Why Go Felt Different</h2>
   <p>
-    I'd tried learning JavaScript and Python before. Both felt overwhelming – 
-    too many ways to do the same thing, too many frameworks to choose from. 
-    Go was different. It reminded me of the design principle: "good design is 
-    as little design as possible."
+    I'd tried learning JavaScript and Python before. Both felt overwhelming –
+    too many ways to do the same thing, too many frameworks to choose from. Go
+    was different. It reminded me of the design principle: "good design is as
+    little design as possible."
   </p>
 
   <h3>The Designer Brain Loves:</h3>
   <ul>
     <li><strong>Clear conventions:</strong> One obvious way to do things</li>
-    <li><strong>Readable code:</strong> You can understand it just by reading</li>
-    <li><strong>Fast feedback:</strong> Compilation errors are immediately clear</li>
+    <li>
+      <strong>Readable code:</strong> You can understand it just by reading
+    </li>
+    <li>
+      <strong>Fast feedback:</strong> Compilation errors are immediately clear
+    </li>
     <li><strong>Simple deployment:</strong> One binary, no dependencies</li>
   </ul>
 
   <h2>My First Real Go Project</h2>
   <p>
-    Our team needed a simple API to serve user preference data to our frontend. 
-    The backend team was swamped, so I volunteered to prototype it. "How hard 
+    Our team needed a simple API to serve user preference data to our frontend.
+    The backend team was swamped, so I volunteered to prototype it. "How hard
     could it be?"
   </p>
 
-  <p>
-    Famous last words, right? But surprisingly, it wasn't that hard.
-  </p>
-
-  <pre><code>func getUserPreferences(w http.ResponseWriter, r *http.Request) {
+  <p>Famous last words, right? But surprisingly, it wasn't that hard.</p>
+  <pre><code>func getUserPreferences(w http.ResponseWriter, r *http.Request) &#123;
     userID := r.URL.Query().Get("user")
-    if userID == "" {
+    if userID == "" &#123;
         http.Error(w, "user parameter required", http.StatusBadRequest)
         return
-    }
+    &#125;
     
     // Fetch from database
     prefs, err := db.GetPreferences(userID)
-    if err != nil {
+    if err != nil &#123;
         http.Error(w, "unable to fetch preferences", http.StatusInternalServerError)
         return
-    }
+    &#125;
     
     // Return JSON
     w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(prefs)
-}</code></pre>
+&#125;</code></pre>
 
   <h3>What I Loved About This:</h3>
   <ul>
@@ -83,11 +84,12 @@ const post = {
 
   <h2>The Design Thinking Connection</h2>
   <p>
-    Learning Go taught me that good code and good design share the same principles:
+    Learning Go taught me that good code and good design share the same
+    principles:
   </p>
 
   <blockquote>
-    "Clarity over cleverness. Simplicity over complexity. Consistency over 
+    "Clarity over cleverness. Simplicity over complexity. Consistency over
     novelty. These aren't just design principles – they're life principles."
   </blockquote>
 
@@ -95,113 +97,111 @@ const post = {
 
   <h3>Pointers and Memory Management</h3>
   <p>
-    Coming from design tools, the concept of memory management was foreign. 
-    But Go's garbage collector handles most of this automatically. When I did 
-    need pointers, I thought of them like "references" to shared design assets.
+    Coming from design tools, the concept of memory management was foreign. But
+    Go's garbage collector handles most of this automatically. When I did need
+    pointers, I thought of them like "references" to shared design assets.
   </p>
 
   <h3>Goroutines and Concurrency</h3>
   <p>
-    This was actually easier to understand than I expected. Goroutines are like 
-    having multiple design processes running at the same time – each working on 
+    This was actually easier to understand than I expected. Goroutines are like
+    having multiple design processes running at the same time – each working on
     their own task, occasionally sharing results.
   </p>
 
   <h3>Testing Philosophy</h3>
   <p>
-    Go's testing approach clicked immediately. It's like usability testing for 
+    Go's testing approach clicked immediately. It's like usability testing for
     code – you write scenarios to make sure your functions behave as expected.
   </p>
-
-  <pre><code>func TestGetUserPreferences(t *testing.T) {
+  <pre><code>func TestGetUserPreferences(t *testing.T) &#123;
     // Test with valid user
     req := httptest.NewRequest("GET", "/prefs?user=123", nil)
     w := httptest.NewRecorder()
     
     getUserPreferences(w, req)
     
-    if w.Code != http.StatusOK {
+    if w.Code != http.StatusOK &#123;
         t.Errorf("Expected status 200, got %d", w.Code)
-    }
-}</code></pre>
+    &#125;
+&#125;</code></pre>
 
   <h2>How Learning Go Changed My Design Work</h2>
 
   <h3>Better API Design</h3>
   <p>
-    Understanding how APIs work made me a better UX designer. I now design 
-    interfaces knowing how the data flows behind them. My designs are more 
+    Understanding how APIs work made me a better UX designer. I now design
+    interfaces knowing how the data flows behind them. My designs are more
     technically feasible because I understand the constraints.
   </p>
 
   <h3>Performance Awareness</h3>
   <p>
-    Learning about Go's performance characteristics made me more conscious of 
-    how my design decisions affect real users. Big images, complex animations, 
+    Learning about Go's performance characteristics made me more conscious of
+    how my design decisions affect real users. Big images, complex animations,
     unnecessary API calls – I now think about the cost of every design element.
   </p>
 
   <h3>System Thinking</h3>
   <p>
-    Go forced me to think in systems – how different parts connect, how data 
-    flows, how errors propagate. This made me better at designing cohesive 
-    user experiences across multiple touchpoints.
+    Go forced me to think in systems – how different parts connect, how data
+    flows, how errors propagate. This made me better at designing cohesive user
+    experiences across multiple touchpoints.
   </p>
 
   <h2>To Other Designers Considering Code</h2>
 
   <h3>Start With Why</h3>
   <p>
-    Don't learn to code just because you think you should. Find a real problem 
-    you want to solve. For me, it was understanding how the products I designed 
+    Don't learn to code just because you think you should. Find a real problem
+    you want to solve. For me, it was understanding how the products I designed
     actually worked.
   </p>
 
   <h3>Choose Your Language Wisely</h3>
   <p>
-    Go might not be the "best" first language for everyone, but it was perfect 
-    for me. The simplicity reduced cognitive load, letting me focus on learning 
+    Go might not be the "best" first language for everyone, but it was perfect
+    for me. The simplicity reduced cognitive load, letting me focus on learning
     programming concepts rather than language quirks.
   </p>
 
   <h3>Embrace Beginner's Mind</h3>
   <p>
-    Coming from design, I had strong opinions about "good" and "bad." Programming 
-    taught me to question assumptions and stay curious. Sometimes the "ugly" 
-    solution is the right one.
+    Coming from design, I had strong opinions about "good" and "bad."
+    Programming taught me to question assumptions and stay curious. Sometimes
+    the "ugly" solution is the right one.
   </p>
 
   <h2>The Kawaii Coder Journey</h2>
   <p>
-    Learning Go didn't make me a programmer who designs. It made me a designer 
-    who codes. I still think like a UXer – focusing on user needs, clear 
-    communication, and delightful experiences. But now I can prototype my ideas 
+    Learning Go didn't make me a programmer who designs. It made me a designer
+    who codes. I still think like a UXer – focusing on user needs, clear
+    communication, and delightful experiences. But now I can prototype my ideas
     end-to-end.
   </p>
 
   <p>
-    The best part? My anime figurines look perfectly at home next to my 
-    programming books. Some of my best debugging sessions happen while wearing 
+    The best part? My anime figurines look perfectly at home next to my
+    programming books. Some of my best debugging sessions happen while wearing
     kawaii pajamas and drinking way too much coffee.
   </p>
 
   <h2>What's Next</h2>
   <p>
-    I'm not trying to become a full-stack engineer overnight. But having 
-    programming skills has made me infinitely more effective as a UX designer. 
-    I can prototype complex interactions, understand technical constraints, and 
+    I'm not trying to become a full-stack engineer overnight. But having
+    programming skills has made me infinitely more effective as a UX designer. I
+    can prototype complex interactions, understand technical constraints, and
     speak the same language as my developer teammates.
   </p>
 
   <p>
-    Most importantly, learning Go reminded me why I love technology: it's a 
-    tool for solving human problems. Whether I'm designing an interface or 
-    writing a function, the goal is the same – make someone's life a little 
-    bit better.
+    Most importantly, learning Go reminded me why I love technology: it's a tool
+    for solving human problems. Whether I'm designing an interface or writing a
+    function, the goal is the same – make someone's life a little bit better.
   </p>
 
   <p>
-    And if I can do it while embracing my kawaii aesthetic and Mexican heritage, 
+    And if I can do it while embracing my kawaii aesthetic and Mexican heritage,
     even better. Technology doesn't have to be boring just because it's serious.
   </p>
 </BlogLayout>

@@ -1,272 +1,241 @@
 ---
-import BlogLayout from '../../layouts/BlogLayout.astro';
+import BlogLayout from "../../layouts/BlogLayout.astro";
 
-const title = "Building Go APIs That Don't Suck: A Designer's Guide";
-const description = "Lessons learned from designing and building Go APIs at Google that prioritize developer experience and human usability.";
-const publishDate = "2024-12-14";
-const category = "Golang";
-const readTime = "7 min read";
+const post = {
+  title: "Building Go APIs That Don't Suck: A Designer's Guide",
+  date: "2024-12-14",
+  readTime: "7 min read",
+  category: "Golang",
+  excerpt:
+    "Lessons learned from designing and building Go APIs at Google that prioritize developer experience and human usability.",
+  slug: "golang-apis-that-dont-suck",
+};
 ---
 
-<BlogLayout 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  category={category}
-  readTime={readTime}
->
+<BlogLayout post={post}>
+  <p>
+    <strong>Hot take:</strong> Most APIs are designed by engineers for engineers,
+    which explains why they're often terrible UX.
+  </p>
 
-**Hot take:** Most APIs are designed by engineers for engineers, which explains why they're often terrible UX.
+  <p>
+    As a UX designer who codes Go at Google, I've learned that <strong
+      >APIs are user interfaces too</strong
+    >. The users just happen to be developers instead of end customers.
+  </p>
 
-As a UX designer who codes Go at Google, I've learned that **APIs are user interfaces too**. The users just happen to be developers instead of end customers.
+  <h2>API Design is UX Design 🎨</h2>
 
-## API Design is UX Design 🎨
+  <h3>The Mindset Shift</h3>
 
-### The Mindset Shift
+  <p>Instead of thinking "What can this system do?" ask:</p>
+  <ul>
+    <li><strong>"What does the developer want to accomplish?"</strong></li>
+    <li><strong>"What's the most intuitive way to express this?"</strong></li>
+    <li>
+      <strong>"How do we make errors helpful instead of cryptic?"</strong>
+    </li>
+  </ul>
 
-Instead of thinking "What can this system do?" ask:
-- **"What does the developer want to accomplish?"**
-- **"What's the most intuitive way to express this?"**
-- **"How do we make errors helpful instead of cryptic?"**
+  <h2>Go's API Design Superpowers</h2>
 
-## Go's API Design Superpowers
+  <h3>1. Types as Documentation</h3>
 
-### 1. Types as Documentation
-
-```go
-// Bad: Vague and confusing
-func CreateUser(data map[string]interface{}) error
+  <pre><code>// Bad: Vague and confusing
+func CreateUser(data map[string]interface&#123;&#125;) error
 
 // Good: Self-documenting
-type CreateUserRequest struct {
+type CreateUserRequest struct &#123;
     Email    string `json:"email" validate:"required,email"`
     Name     string `json:"name" validate:"required,min=2"`
     Role     Role   `json:"role" validate:"required"`
-}
+&#125;
 
-func CreateUser(req CreateUserRequest) (*User, error)
-```
+func CreateUser(req CreateUserRequest) (*User, error)</code></pre>
 
-**The type tells a story.** What's required? What format? What are the constraints? All clear from the signature.
+  <p>
+    <strong>The type tells a story.</strong> What's required? What format? What are
+    the constraints? All clear from the signature.
+  </p>
 
-### 2. Errors That Actually Help
+  <h3>2. Errors That Actually Help</h3>
 
-```go
-// Bad: Panic-inducing
+  <pre><code>// Bad: Panic-inducing
 return fmt.Errorf("invalid input")
 
 // Good: Actionable guidance
 return fmt.Errorf("email '%s' is invalid: must be a valid email address (example: user@domain.com)", email)
 
 // Even better: Structured errors
-type ValidationError struct {
+type ValidationError struct &#123;
     Field   string `json:"field"`
     Value   string `json:"value"`
     Message string `json:"message"`
     Code    string `json:"code"`
-}
-```
+&#125;</code></pre>
 
-**Error messages are microcopy.** Make them helpful, not hostile.
+  <p>
+    <strong>Error messages are microcopy.</strong> Make them helpful, not hostile.
+  </p>
 
-## Real Examples from Google Production
+  <h3>3. Consistent Response Patterns</h3>
 
-### Case Study: The File Upload API
+  <pre><code>// Standard error response
+type ErrorResponse struct &#123;
+    Error   string            `json:"error"`
+    Code    string            `json:"code"`
+    Details map[string]string `json:"details,omitempty"`
+&#125;</code></pre>
 
-**Version 1 (Engineer-Designed):**
-```go
-func UploadFile(data []byte, metadata map[string]string) (string, error)
-```
+  <h3>4. Thoughtful Defaults</h3>
 
-**Problems:**
-- What goes in metadata?
-- What's the return value format?
-- How do I handle large files?
-- What happens when it fails?
-
-**Version 2 (UX-Informed):**
-```go
-type UploadOptions struct {
+  <pre><code>type UploadConfig struct &#123;
     MaxSize     int64             `json:"max_size,omitempty"`
     AllowedTypes []string         `json:"allowed_types,omitempty"`
+    Compress    bool              `json:"compress"`
     Metadata    map[string]string `json:"metadata,omitempty"`
-}
+&#125;
 
-type UploadResult struct {
+type UploadResponse struct &#123;
     FileID      string            `json:"file_id"`
     URL         string            `json:"url"`
     Size        int64             `json:"size"`
     ContentType string            `json:"content_type"`
-    Metadata    map[string]string `json:"metadata"`
-}
+&#125;</code></pre>
 
-func UploadFile(reader io.Reader, options UploadOptions) (*UploadResult, error)
-```
+  <h2>Real-World API Patterns That Work</h2>
 
-**What changed:**
-- ✅ **Clear expectations** (options struct)
-- ✅ **Rich response** (everything you need)
-- ✅ **Streaming support** (io.Reader)
-- ✅ **Self-documenting** (field names and tags)
+  <h3>Request/Response Wrapping</h3>
 
-## The Kawaii Guide to Go API Patterns ✨
-
-### Pattern 1: Options Structs Over Long Parameter Lists
-
-```go
-// Ugly: Too many parameters
-func CreateService(name, region, size, backup string, replicas int, ssl bool) error
-
-// Beautiful: Options pattern
-type ServiceConfig struct {
+  <pre><code>// Wrap everything in a consistent structure
+type CreateUserRequest struct &#123;
     Name     string `json:"name" validate:"required"`
-    Region   string `json:"region" validate:"required"`
-    Size     string `json:"size" default:"small"`
-    Backup   bool   `json:"backup" default:"true"`
-    Replicas int    `json:"replicas" default:"3"`
-    SSL      bool   `json:"ssl" default:"true"`
-}
+    Email    string `json:"email" validate:"required,email"`
+    Password string `json:"password" validate:"required,min=8"`
+&#125;</code></pre>
 
-func CreateService(config ServiceConfig) error
-```
+  <h3>Standard Response Envelope</h3>
 
-### Pattern 2: Context-Aware Responses
+  <pre><code>type APIResponse[T any] struct &#123;
+    Success   bool              `json:"success"`
+    Data      T                 `json:"data"`
+    Error     *ErrorResponse    `json:"error,omitempty"`
+    Meta      map[string]any    `json:"meta,omitempty"`
+    RequestID string            `json:"request_id"`
+    Timestamp time.Time         `json:"timestamp"`
+&#125;</code></pre>
 
-```go
-type APIResponse[T any] struct {
-    Data    T                 `json:"data"`
-    Meta    ResponseMetadata  `json:"meta"`
-    Errors  []APIError       `json:"errors,omitempty"`
-}
+  <h2>Pagination That Doesn't Suck</h2>
 
-type ResponseMetadata struct {
-    RequestID string    `json:"request_id"`
-    Timestamp time.Time `json:"timestamp"`
-    Version   string    `json:"version"`
-}
-```
+  <pre><code>type PaginationParams struct &#123;
+    Page     int    `json:"page" validate:"min=1"`
+    Limit    int    `json:"limit" validate:"min=1,max=100"`
+    SortBy   string `json:"sort_by,omitempty"`
+    SortDir  string `json:"sort_dir,omitempty" validate:"oneof=asc desc"`
+    Search   string `json:"search,omitempty"`
+&#125;</code></pre>
 
-**Always include** what developers need for debugging!
+  <h3>Include Everything Developers Need:</h3>
 
-### Pattern 3: Fluent Interfaces for Complex Operations
+  <pre><code>type UserListResponse struct &#123;
+    Users      []User `json:"users"`
+    Pagination struct &#123;
+        CurrentPage  int  `json:"current_page"`
+        TotalPages   int  `json:"total_pages"`
+        TotalItems   int  `json:"total_items"`
+        ItemsPerPage int  `json:"items_per_page"`
+        HasNext      bool `json:"has_next"`
+        HasPrev      bool `json:"has_prev"`
+    &#125; `json:"pagination"`
+&#125;</code></pre>
 
-```go
-// Instead of this overwhelming constructor:
-service := NewComplexService(config, logger, metrics, tracer, cache, db)
+  <h2>Documentation as Code</h2>
 
-// Try this fluent builder:
-service := NewServiceBuilder().
-    WithConfig(config).
-    WithLogger(logger).
-    WithMetrics(metrics).
-    EnableTracing().
-    Build()
-```
+  <p>Your Go structs ARE your API documentation when done right:</p>
 
-## User Journey Mapping for APIs 🗺️
+  <pre><code>type User struct &#123;
+    ID       string    `json:"id" example:"usr_123456789"`
+    Email    string    `json:"email" example:"user@example.com"`
+    Name     string    `json:"name" example:"Jane Smith"`
+    Role     string    `json:"role" example:"admin" enums:"admin,user,viewer"`
+    Created  time.Time `json:"created_at"`
+    LastSeen time.Time `json:"last_seen_at"`
+&#125;</code></pre>
 
-### The Developer's Journey
+  <h2>Error Handling Philosophy</h2>
 
-1. **Discovery:** "How do I...?"
-2. **Learning:** "What parameters do I need?"
-3. **Implementation:** "How do I call this?"
-4. **Debugging:** "Why isn't this working?"
-5. **Optimization:** "How can I make this faster?"
+  <pre><code>// Production-ready error handling
+func (s *UserService) GetUser(id string) (*User, error) &#123;
+    if id == "" &#123;
+        return nil, &ValidationError&#123;
+            Field:   "id",
+            Message: "User ID is required",
+            Code:    "MISSING_USER_ID",
+        &#125;
+    &#125;
+    
+    user, err := s.repo.GetByID(id)
+    if err != nil &#123;
+        if errors.Is(err, sql.ErrNoRows) &#123;
+            return nil, &NotFoundError&#123;
+                Resource: "user",
+                ID:       id,
+                Code:     "USER_NOT_FOUND",
+            &#125;
+        &#125;
+        return nil, fmt.Errorf("failed to get user: %w", err)
+    &#125;
+    
+    return user, nil
+&#125;</code></pre>
 
-**Design for each step.**
+  <h2>The 15-Minute Rule</h2>
 
-### Example: Authentication API Journey
+  <p>A new developer should be able to:</p>
+  <ul>
+    <li><strong>Understand your API</strong> in 5 minutes</li>
+    <li><strong>Make their first successful call</strong> in 10 minutes</li>
+    <li><strong>Build something useful</strong> in 15 minutes</li>
+  </ul>
 
-```go
-// Step 1: Discovery (godoc comments)
-// AuthService handles user authentication and token management.
-// Common use cases:
-//   - Login: auth.Login(credentials)
-//   - Token refresh: auth.RefreshToken(token)
-//   - Validation: auth.ValidateToken(token)
+  <p>If it takes longer, your API UX needs work.</p>
 
-// Step 2: Learning (clear types)
-type LoginCredentials struct {
-    Email    string `json:"email" example:"user@example.com"`
-    Password string `json:"password" minLength:"8"`
-}
+  <h2>Tools That Help</h2>
 
-// Step 3: Implementation (simple interface)
-func (a *AuthService) Login(ctx context.Context, creds LoginCredentials) (*AuthResult, error)
+  <ul>
+    <li>
+      <strong>Swagger/OpenAPI:</strong> Generate docs from your Go structs
+    </li>
+    <li><strong>Postman Collections:</strong> Make testing easy</li>
+    <li><strong>Go Playground examples:</strong> Let people experiment</li>
+    <li><strong>SDK generation:</strong> Reduce integration friction</li>
+  </ul>
 
-// Step 4: Debugging (structured errors)
-var ErrInvalidCredentials = &AuthError{
-    Code:    "INVALID_CREDENTIALS",
-    Message: "Email or password is incorrect",
-    Hint:    "Check your credentials and try again",
-}
+  <h2>The Kawaii Touch</h2>
 
-// Step 5: Optimization (context support)
-func (a *AuthService) LoginWithTimeout(ctx context.Context, creds LoginCredentials, timeout time.Duration) (*AuthResult, error)
-```
+  <p>
+    Even APIs can have personality! Your error messages don't have to be cold
+    and robotic:
+  </p>
 
-## Testing APIs Like UX Prototypes
+  <blockquote>
+    <p>
+      "Oops! That email address looks a bit funky. Mind double-checking it?
+      We're expecting something like user@domain.com 🌸"
+    </p>
+  </blockquote>
 
-### The "New Developer Test"
+  <p>Just remember: <strong>helpful first, personality second.</strong></p>
 
-1. **Give the API docs** to someone who's never seen the code
-2. **Time how long** it takes them to accomplish common tasks
-3. **Count questions** they ask (each question is a UX failure)
-4. **Note frustrations** and unclear moments
+  <h2>Testing Your API UX</h2>
 
-### Example Test Script:
-- "Create a user account"
-- "Upload a profile picture"
-- "Update user preferences"
-- "Handle a validation error"
-- "Delete the account"
+  <p>
+    Give your API to someone who's never seen it before. Watch them try to use
+    it. The places they get confused? Those are your UX problems.
+  </p>
 
-## My Go API Design Checklist ✅
-
-### Before Writing Code:
-- [ ] What problem does this solve?
-- [ ] What's the simplest interface?
-- [ ] How will errors be handled?
-- [ ] What examples should I provide?
-
-### During Development:
-- [ ] Can I explain this to a new team member in 2 minutes?
-- [ ] Are errors actionable?
-- [ ] Does the happy path feel natural?
-- [ ] Is the godoc helpful?
-
-### Before Shipping:
-- [ ] Have I tested with real use cases?
-- [ ] Are there enough examples?
-- [ ] Can someone debug this at 3 AM?
-- [ ] Would I want to use this API?
-
-## The Mexico to Google Perspective 🌎
-
-Coming from Mexico to Silicon Valley taught me about **inclusive design**. APIs should work for:
-
-- **Junior developers** (clear patterns)
-- **Non-native speakers** (simple, consistent naming)
-- **Different cultural contexts** (avoid idioms)
-- **Various experience levels** (progressive complexity)
-
-## Real Impact Metrics
-
-At Google, our Go APIs improved dramatically when we started measuring:
-
-- **Time to first successful call**
-- **Developer satisfaction scores**
-- **Support ticket volume**
-- **Adoption rate across teams**
-
-Good API UX shows up in the numbers.
-
----
-
-**Remember:** Every function signature is a user interface. Every error message is user feedback. Every type definition is documentation.
-
-**Design your Go APIs like you'd design any other user experience** - with empathy, clarity, and genuine care for the people who'll use them.
-
-*What's the best (or worst) API experience you've had recently? I collect examples of both! 🌟*
-
+  <p>
+    Build APIs that feel intuitive, not just functional. Your future self (and
+    your teammates) will thank you. ✨
+  </p>
 </BlogLayout>

@@ -1,146 +1,72 @@
 ---
-import BlogLayout from '../../layouts/BlogLayout.astro';
+import BlogLayout from "../../layouts/BlogLayout.astro";
 
-const title = "UX Principles That Make Me a Better DevOps Engineer";
-const description = "How thinking like a UX designer revolutionized my approach to infrastructure, monitoring, and developer experience.";
-const publishDate = "2024-12-18";
-const category = "DevOps";
-const readTime = "5 min read";
+const post = {
+  title: "UX Principles That Make Me a Better DevOps Engineer",
+  date: "2024-12-18",
+  readTime: "5 min read",
+  category: "DevOps",
+  excerpt:
+    "How thinking like a UX designer revolutionized my approach to infrastructure, monitoring, and developer experience.",
+  slug: "ux-principles-for-devops-engineers",
+};
 ---
 
-<BlogLayout 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  category={category}
-  readTime={readTime}
->
-
-Plot twist: **The best DevOps engineers think like UX designers.**
-
-After 3+ years at Google, I've realized that infrastructure and user interfaces have more in common than anyone talks about. Both need to be intuitive, reliable, and serve real human needs.
-
-## The "Users" of Your Infrastructure 👥
-
-### Who Are Your Real Users?
-
-- **Developers** deploying code at 2 AM
-- **SREs** investigating incidents during coffee breaks
-- **Product teams** needing quick environment spin-ups
-- **Future you** trying to understand what past you built
-
-Every pipeline, every monitoring dashboard, every deployment script has **humans** on the other side. Design for them.
-
-## UX Principle #1: Empathy-Driven Infrastructure
-
-### Bad DevOps Experience:
-```bash
-# Error: Something went wrong
-# (Good luck figuring out what!)
-```
-
-### Good DevOps Experience:
-```bash
-# ❌ Deployment failed
-# 🔍 Reason: Image tag 'v1.2.3' not found in registry
-# 💡 Suggestion: Check available tags or update version
-# 📚 Docs: https://internal.wiki/deploy-guide
-```
-
-**Clear error messages save sanity.** Just like good UI copy guides users, good error messages guide developers.
-
-## UX Principle #2: Progressive Disclosure
-
-Don't overwhelm your "users" with everything at once.
-
-### Monitoring Dashboard Design:
-- **Level 1:** Health overview (green/red status)
-- **Level 2:** Key metrics (latency, errors, throughput)
-- **Level 3:** Detailed logs and traces
-- **Level 4:** Raw data exports
-
-This is literally **information architecture** applied to ops!
-
-## UX Principle #3: Consistency is King 👑
-
-Just like design systems, **infrastructure patterns** should be predictable:
-
-- **Same naming conventions** across all services
-- **Consistent deployment patterns** (no surprises!)
-- **Standardized logging formats** (JSON everywhere)
-- **Unified monitoring approaches** (Prometheus + Grafana)
-
-When everything follows the same patterns, cognitive load drops dramatically.
-
-## Real Examples from Google
-
-### Making CI/CD Kawaii ✨
-
-Instead of intimidating build pipelines, I design them like user journeys:
-
-1. **Onboarding:** Easy setup with templates
-2. **Feedback:** Clear progress indicators
-3. **Error handling:** Helpful suggestions, not panic
-4. **Success:** Celebration (yes, emojis in Slack!)
-
-### Kubernetes for Humans
-
-YAML can be scary. But what if we treated it like a design system?
-
-```yaml
-# Good: Self-documenting configuration
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: user-service
-  labels:
-    app: user-service
-    version: v1.0.0
-    owner: platform-team
-    # Human-readable purpose
-    purpose: "Handles user authentication and profiles"
-```
-
-## The Mindset Shift 🧠
-
-### Traditional DevOps Thinking:
-"Does it work? Ship it."
-
-### UX-Informed DevOps Thinking:
-- **"Is it intuitive** for the next person?"
-- **"What happens when this fails?"** (And it will fail)
-- **"How do we make debugging delightful?"** (Or at least not painful)
-- **"What would 3 AM me need to see here?"**
-
-## Tools That Spark Joy ✨
-
-My kawaii-approved DevOps stack:
-
-- **Grafana:** Beautiful dashboards (aesthetics matter!)
-- **Slack bots:** Friendly notifications with emojis
-- **GitHub Actions:** Visual workflows
-- **kubectl with colors:** `kubectl get pods` but make it pretty
-
-## The Human Side of Automation
-
-Remember: **We automate boring tasks so humans can do creative work.**
-
-Every script I write, every pipeline I build, every monitoring alert I configure - it's all about **giving people their time back** to focus on what matters.
-
-## My DevOps Design Process
-
-1. **Research:** What pain points do developers have?
-2. **Ideate:** How can we make this smoother?
-3. **Prototype:** Start with simple automation
-4. **Test:** Get feedback from actual users
-5. **Iterate:** Improve based on real usage
-
-Sound familiar? It's literally the design thinking process!
-
----
-
-**Hot take:** The future of DevOps is human-centered design. We're not just managing infrastructure; we're **crafting experiences** that help people build amazing things.
-
-*What DevOps practices have you seen that felt surprisingly user-friendly? I'm always collecting examples of delightful infrastructure! 🌟*
-
+<BlogLayout post={post}>
+  Plot twist: **The best DevOps engineers think like UX designers.** After 3+
+  years at Google, I've realized that infrastructure and user interfaces have
+  more in common than anyone talks about. Both need to be intuitive, reliable,
+  and serve real human needs. ## The "Users" of Your Infrastructure 👥 ### Who
+  Are Your Real Users? - **Developers** deploying code at 2 AM - **SREs**
+  investigating incidents during coffee breaks - **Product teams** needing quick
+  environment spin-ups - **Future you** trying to understand what past you built
+  Every pipeline, every monitoring dashboard, every deployment script has
+  **humans** on the other side. Design for them. ## UX Principle #1:
+  Empathy-Driven Infrastructure ### Bad DevOps Experience: ```bash # Error:
+  Something went wrong # (Good luck figuring out what!) ``` ### Good DevOps
+  Experience: ```bash # ❌ Deployment failed # 🔍 Reason: Image tag 'v1.2.3' not
+  found in registry # 💡 Suggestion: Check available tags or update version # 📚
+  Docs: https://internal.wiki/deploy-guide ``` **Clear error messages save
+  sanity.** Just like good UI copy guides users, good error messages guide
+  developers. ## UX Principle #2: Progressive Disclosure Don't overwhelm your
+  "users" with everything at once. ### Monitoring Dashboard Design: - **Level
+  1:** Health overview (green/red status) - **Level 2:** Key metrics (latency,
+  errors, throughput) - **Level 3:** Detailed logs and traces - **Level 4:** Raw
+  data exports This is literally **information architecture** applied to ops! ##
+  UX Principle #3: Consistency is King 👑 Just like design systems,
+  **infrastructure patterns** should be predictable: - **Same naming
+  conventions** across all services - **Consistent deployment patterns** (no
+  surprises!) - **Standardized logging formats** (JSON everywhere) - **Unified
+  monitoring approaches** (Prometheus + Grafana) When everything follows the
+  same patterns, cognitive load drops dramatically. ## Real Examples from Google
+  ### Making CI/CD Kawaii ✨ Instead of intimidating build pipelines, I design
+  them like user journeys: 1. **Onboarding:** Easy setup with templates 2.
+  **Feedback:** Clear progress indicators 3. **Error handling:** Helpful
+  suggestions, not panic 4. **Success:** Celebration (yes, emojis in Slack!) ###
+  Kubernetes for Humans YAML can be scary. But what if we treated it like a
+  design system? ```yaml # Good: Self-documenting configuration apiVersion:
+  apps/v1 kind: Deployment metadata: name: user-service labels: app:
+  user-service version: v1.0.0 owner: platform-team # Human-readable purpose
+  purpose: "Handles user authentication and profiles" ``` ## The Mindset Shift
+  🧠 ### Traditional DevOps Thinking: "Does it work? Ship it." ### UX-Informed
+  DevOps Thinking: - **"Is it intuitive** for the next person?" - **"What
+  happens when this fails?"** (And it will fail) - **"How do we make debugging
+  delightful?"** (Or at least not painful) - **"What would 3 AM me need to see
+  here?"** ## Tools That Spark Joy ✨ My kawaii-approved DevOps stack: -
+  **Grafana:** Beautiful dashboards (aesthetics matter!) - **Slack bots:**
+  Friendly notifications with emojis - **GitHub Actions:** Visual workflows -
+  **kubectl with colors:** `kubectl get pods` but make it pretty ## The Human
+  Side of Automation Remember: **We automate boring tasks so humans can do
+  creative work.** Every script I write, every pipeline I build, every
+  monitoring alert I configure - it's all about **giving people their time
+  back** to focus on what matters. ## My DevOps Design Process 1. **Research:**
+  What pain points do developers have? 2. **Ideate:** How can we make this
+  smoother? 3. **Prototype:** Start with simple automation 4. **Test:** Get
+  feedback from actual users 5. **Iterate:** Improve based on real usage Sound
+  familiar? It's literally the design thinking process! --- **Hot take:** The
+  future of DevOps is human-centered design. We're not just managing
+  infrastructure; we're **crafting experiences** that help people build amazing
+  things. *What DevOps practices have you seen that felt surprisingly
+  user-friendly? I'm always collecting examples of delightful infrastructure!
+  🌟*
 </BlogLayout>
